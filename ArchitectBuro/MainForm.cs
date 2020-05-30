@@ -75,10 +75,75 @@ namespace ArchitectBuro
             }
         }
 
-        public void RefreshDataGridView(object dataSource)
+        public void RefreshDataGridView(List<Project> dataSource)
         {
-            dataGridView.DataSource = null;
-            dataGridView.DataSource = dataSource;
+            dataGridView.Rows.Clear();
+            dataGridView.ColumnCount = 7;
+            dataGridView.Columns[0].Name = "ID";
+            dataGridView.Columns[1].Name = "Команда";
+            dataGridView.Columns[2].Name = "Дата заказа";
+            dataGridView.Columns[3].Name = "Дата окончания";
+            dataGridView.Columns[4].Name = "Статус проекта";
+            dataGridView.Columns[5].Name = "Тип проекта";
+            dataGridView.Columns[6].Name = "Клиент";
+            foreach (Project item in dataSource)
+            {
+                dataGridView.Rows.Add(
+                    item.Id,
+                    item.Team.Name,
+                    item.OrderDate.ToString("dd.MM.yyyy"),
+                    item.FinishDate.ToString("dd.MM.yyyy"),
+                    item.ProjectStatus.Name,
+                    item.ProjectType.Name,
+                    item.Customer.FirstName + " " + item.Customer.LastName
+                    );
+            }
+        }
+
+        public void RefreshDataGridView(List<Employee> dataSource)
+        {
+            dataGridView.Rows.Clear();
+            dataGridView.ColumnCount = 8;
+            dataGridView.Columns[0].Name = "ID";
+            dataGridView.Columns[1].Name = "Команда";
+            dataGridView.Columns[2].Name = "Должность";
+            dataGridView.Columns[3].Name = "Имя Фамилия";
+            dataGridView.Columns[4].Name = "Дата рождения";
+            dataGridView.Columns[5].Name = "Домашний адрес";
+            dataGridView.Columns[6].Name = "Телефон";
+            dataGridView.Columns[7].Name = "Дата приёма";
+            foreach (Employee item in dataSource)
+            {
+                dataGridView.Rows.Add(
+                    item.Id,
+                    item.Team.Name,
+                    item.Position.Name,
+                    item.FirstName + " " + item.LastName,
+                    item.BirthDate.ToString("dd.MM.yyyy"),
+                    item.HomeAddress,
+                    item.Phone,
+                    item.ApplyDate.ToString("dd.MM.yyyy")
+                    );
+            }
+        }
+
+        public void RefreshDataGridView(List<Customer> dataSource)
+        {
+            dataGridView.Rows.Clear();
+            dataGridView.ColumnCount = 4;
+            dataGridView.Columns[0].Name = "ID";
+            dataGridView.Columns[1].Name = "Имя Фамилия";
+            dataGridView.Columns[2].Name = "Почта";
+            dataGridView.Columns[3].Name = "Телефон";
+            foreach (Customer item in dataSource)
+            {
+                dataGridView.Rows.Add(
+                    item.Id,
+                    item.FirstName + " " + item.LastName,
+                    item.Email,
+                    item.Phone
+                    );
+            }
         }
 
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)

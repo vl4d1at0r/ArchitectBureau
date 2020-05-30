@@ -464,7 +464,6 @@
             this.Controls.Add(this.projectPanel);
             this.Controls.Add(this.customerPanel);
             this.Name = "AddForm";
-            this.Load += new System.EventHandler(this.AddForm_Load);
             this.projectPanel.ResumeLayout(false);
             this.projectPanel.PerformLayout();
             this.employeePanel.ResumeLayout(false);

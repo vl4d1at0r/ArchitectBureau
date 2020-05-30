@@ -125,11 +125,6 @@ namespace ArchitectBuro
             }
         }
 
-        private void AddForm_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private void addButton(object sender, EventArgs e)
         {
             using (MySQLApplicationContext db = new MySQLApplicationContext())
