@@ -8,6 +8,7 @@ using ArchitectBuroDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Bogus;
 using System.Threading;
+using Bogus.DataSets;
 
 namespace ArchitectBuroSeeder
 {
@@ -45,12 +46,12 @@ namespace ArchitectBuroSeeder
                 Console.Write("OK\nДобавление типов проектов... ");
 
                 db.ProjectTypes.AddRange(
-                    new ProjectType() { Name = "Архитектура" },
-                    new ProjectType() { Name = "Дизайн интерьеров" },
-                    new ProjectType() { Name = "Разработка концепции" },
-                    new ProjectType() { Name = "Проектирование" },
-                    new ProjectType() { Name = "Авторский надзор" },
-                    new ProjectType() { Name = "Согласование в службах" }
+                    new ProjectType() { Name = "Архитектура", Price = 1000, Term = 24 },
+                    new ProjectType() { Name = "Дизайн интерьеров", Price = 100, Term = 1 },
+                    new ProjectType() { Name = "Разработка концепции", Price = 50, Term = 1 },
+                    new ProjectType() { Name = "Проектирование", Price = 100, Term = 12 },
+                    new ProjectType() { Name = "Авторский надзор", Price = 100, Term = 1 },
+                    new ProjectType() { Name = "Согласование в службах", Price = 50, Term = 1 }
                     );
                 db.SaveChanges();
                 Console.Write("OK\nДобавление статусов проектов... ");
@@ -117,12 +118,14 @@ namespace ArchitectBuroSeeder
                 for (int i = 0; i < 20; i++)
                 {
                     Faker faker = new Faker("ru");
+                    int teamId = faker.Random.Number(1, db.Teams.Count());
+                    DateTime orderDate = faker.Date.Past(1, new DateTime(DateTime.Now.Year, 1, 1));
                     db.Projects.Add(new Project()
                     {
                         CustomerId = faker.Random.Number(1, db.Customers.Count()),
-                        TeamId = faker.Random.Number(1, db.Teams.Count()),
-                        OrderDate = faker.Date.Past(1, new DateTime(DateTime.Now.Year,1,1)),
-                        FinishDate = faker.Date.Future(1, new DateTime(DateTime.Now.Year, 1, 1)),
+                        TeamId = teamId,
+                        OrderDate = orderDate,
+                        FinishDate = faker.Date.Future(1, orderDate.AddMonths(db.ProjectTypes.ToList()[teamId - 1].Term)),
                         ProjectStatusId = faker.Random.Number(1, db.ProjectStatuses.Count()),
                         ProjectTypeId = faker.Random.Number(1, db.ProjectTypes.Count())
                     });

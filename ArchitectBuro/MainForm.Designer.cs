@@ -36,14 +36,13 @@
             this.financeDocumentation = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectPage = new System.Windows.Forms.TabPage();
-            this.projects = new System.Windows.Forms.DataGridView();
             this.employeePage = new System.Windows.Forms.TabPage();
-            this.employees = new System.Windows.Forms.DataGridView();
             this.customerPage = new System.Windows.Forms.TabPage();
-            this.customers = new System.Windows.Forms.DataGridView();
             this.refreshButton = new System.Windows.Forms.Button();
             this.filterLabel = new System.Windows.Forms.Label();
             this.projectPanel = new System.Windows.Forms.Panel();
+            this.projectDoneDate = new System.Windows.Forms.TextBox();
+            this.projectStartDate = new System.Windows.Forms.TextBox();
             this.projectStatus = new System.Windows.Forms.ComboBox();
             this.projectTypeLabel = new System.Windows.Forms.Label();
             this.projectType = new System.Windows.Forms.ComboBox();
@@ -62,6 +61,8 @@
             this.projectName = new System.Windows.Forms.TextBox();
             this.projectNameLabel = new System.Windows.Forms.Label();
             this.employeePanel = new System.Windows.Forms.Panel();
+            this.employeeAcceptDate = new System.Windows.Forms.TextBox();
+            this.employeeBirthDate = new System.Windows.Forms.TextBox();
             this.employeeAcceptDateLabel = new System.Windows.Forms.Label();
             this.employeePhone = new System.Windows.Forms.TextBox();
             this.employeePhoneLabel = new System.Windows.Forms.Label();
@@ -85,21 +86,13 @@
             this.customerSurnameLabel = new System.Windows.Forms.Label();
             this.customerName = new System.Windows.Forms.TextBox();
             this.customerNameLabel = new System.Windows.Forms.Label();
-            this.projectStartDate = new System.Windows.Forms.TextBox();
-            this.projectDoneDate = new System.Windows.Forms.TextBox();
-            this.employeeBirthDate = new System.Windows.Forms.TextBox();
-            this.employeeAcceptDate = new System.Windows.Forms.TextBox();
+            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.projectPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.projects)).BeginInit();
-            this.employeePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employees)).BeginInit();
-            this.customerPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customers)).BeginInit();
             this.projectPanel.SuspendLayout();
             this.employeePanel.SuspendLayout();
             this.customerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -121,6 +114,7 @@
             this.addItem.Name = "addItem";
             this.addItem.Size = new System.Drawing.Size(71, 20);
             this.addItem.Text = "Добавить";
+            this.addItem.Click += new System.EventHandler(this.addItem_Click);
             // 
             // lateProjects
             // 
@@ -154,78 +148,38 @@
             this.tabControl.Location = new System.Drawing.Point(170, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1000, 547);
+            this.tabControl.Size = new System.Drawing.Size(1000, 19);
             this.tabControl.TabIndex = 1;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             // 
             // projectPage
             // 
-            this.projectPage.Controls.Add(this.projects);
             this.projectPage.Location = new System.Drawing.Point(4, 22);
             this.projectPage.Name = "projectPage";
             this.projectPage.Padding = new System.Windows.Forms.Padding(3);
-            this.projectPage.Size = new System.Drawing.Size(992, 521);
+            this.projectPage.Size = new System.Drawing.Size(992, 0);
             this.projectPage.TabIndex = 0;
             this.projectPage.Text = "Проекти";
             this.projectPage.UseVisualStyleBackColor = true;
             // 
-            // projects
-            // 
-            this.projects.AllowUserToAddRows = false;
-            this.projects.AllowUserToResizeColumns = false;
-            this.projects.AllowUserToResizeRows = false;
-            this.projects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.projects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.projects.Location = new System.Drawing.Point(0, 0);
-            this.projects.Name = "projects";
-            this.projects.Size = new System.Drawing.Size(992, 521);
-            this.projects.TabIndex = 0;
-            this.projects.KeyDown += new System.Windows.Forms.KeyEventHandler(this.projects_KeyDown);
-            // 
             // employeePage
             // 
-            this.employeePage.Controls.Add(this.employees);
             this.employeePage.Location = new System.Drawing.Point(4, 22);
             this.employeePage.Name = "employeePage";
             this.employeePage.Padding = new System.Windows.Forms.Padding(3);
-            this.employeePage.Size = new System.Drawing.Size(992, 521);
+            this.employeePage.Size = new System.Drawing.Size(992, 0);
             this.employeePage.TabIndex = 1;
             this.employeePage.Text = "Співробітники";
             this.employeePage.UseVisualStyleBackColor = true;
             // 
-            // employees
-            // 
-            this.employees.AllowUserToAddRows = false;
-            this.employees.AllowUserToResizeColumns = false;
-            this.employees.AllowUserToResizeRows = false;
-            this.employees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.employees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employees.Location = new System.Drawing.Point(0, 0);
-            this.employees.Name = "employees";
-            this.employees.Size = new System.Drawing.Size(992, 521);
-            this.employees.TabIndex = 0;
-            // 
             // customerPage
             // 
-            this.customerPage.Controls.Add(this.customers);
             this.customerPage.Location = new System.Drawing.Point(4, 22);
             this.customerPage.Name = "customerPage";
-            this.customerPage.Size = new System.Drawing.Size(992, 521);
+            this.customerPage.Size = new System.Drawing.Size(992, 0);
             this.customerPage.TabIndex = 2;
             this.customerPage.Text = "Клиенты";
             this.customerPage.UseVisualStyleBackColor = true;
-            // 
-            // customers
-            // 
-            this.customers.AllowUserToAddRows = false;
-            this.customers.AllowUserToResizeColumns = false;
-            this.customers.AllowUserToResizeRows = false;
-            this.customers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.customers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customers.Location = new System.Drawing.Point(1, 0);
-            this.customers.Name = "customers";
-            this.customers.Size = new System.Drawing.Size(991, 521);
-            this.customers.TabIndex = 0;
             // 
             // refreshButton
             // 
@@ -270,6 +224,20 @@
             this.projectPanel.Name = "projectPanel";
             this.projectPanel.Size = new System.Drawing.Size(168, 474);
             this.projectPanel.TabIndex = 4;
+            // 
+            // projectDoneDate
+            // 
+            this.projectDoneDate.Location = new System.Drawing.Point(3, 138);
+            this.projectDoneDate.Name = "projectDoneDate";
+            this.projectDoneDate.Size = new System.Drawing.Size(159, 20);
+            this.projectDoneDate.TabIndex = 30;
+            // 
+            // projectStartDate
+            // 
+            this.projectStartDate.Location = new System.Drawing.Point(3, 101);
+            this.projectStartDate.Name = "projectStartDate";
+            this.projectStartDate.Size = new System.Drawing.Size(158, 20);
+            this.projectStartDate.TabIndex = 29;
             // 
             // projectStatus
             // 
@@ -436,6 +404,20 @@
             this.employeePanel.Name = "employeePanel";
             this.employeePanel.Size = new System.Drawing.Size(168, 474);
             this.employeePanel.TabIndex = 5;
+            // 
+            // employeeAcceptDate
+            // 
+            this.employeeAcceptDate.Location = new System.Drawing.Point(4, 285);
+            this.employeeAcceptDate.Name = "employeeAcceptDate";
+            this.employeeAcceptDate.Size = new System.Drawing.Size(162, 20);
+            this.employeeAcceptDate.TabIndex = 22;
+            // 
+            // employeeBirthDate
+            // 
+            this.employeeBirthDate.Location = new System.Drawing.Point(3, 73);
+            this.employeeBirthDate.Name = "employeeBirthDate";
+            this.employeeBirthDate.Size = new System.Drawing.Size(162, 20);
+            this.employeeBirthDate.TabIndex = 21;
             // 
             // employeeAcceptDateLabel
             // 
@@ -632,38 +614,22 @@
             this.customerNameLabel.TabIndex = 0;
             this.customerNameLabel.Text = "Имя:";
             // 
-            // projectStartDate
+            // dataGridView
             // 
-            this.projectStartDate.Location = new System.Drawing.Point(3, 101);
-            this.projectStartDate.Name = "projectStartDate";
-            this.projectStartDate.Size = new System.Drawing.Size(158, 20);
-            this.projectStartDate.TabIndex = 29;
-            // 
-            // projectDoneDate
-            // 
-            this.projectDoneDate.Location = new System.Drawing.Point(3, 138);
-            this.projectDoneDate.Name = "projectDoneDate";
-            this.projectDoneDate.Size = new System.Drawing.Size(159, 20);
-            this.projectDoneDate.TabIndex = 30;
-            // 
-            // employeeBirthDate
-            // 
-            this.employeeBirthDate.Location = new System.Drawing.Point(3, 73);
-            this.employeeBirthDate.Name = "employeeBirthDate";
-            this.employeeBirthDate.Size = new System.Drawing.Size(162, 20);
-            this.employeeBirthDate.TabIndex = 21;
-            // 
-            // employeeAcceptDate
-            // 
-            this.employeeAcceptDate.Location = new System.Drawing.Point(4, 285);
-            this.employeeAcceptDate.Name = "employeeAcceptDate";
-            this.employeeAcceptDate.Size = new System.Drawing.Size(162, 20);
-            this.employeeAcceptDate.TabIndex = 22;
+            this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.Location = new System.Drawing.Point(170, 49);
+            this.dataGridView.Name = "dataGridView";
+            this.dataGridView.Size = new System.Drawing.Size(996, 521);
+            this.dataGridView.TabIndex = 7;
+            this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1170, 573);
+            this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.filterLabel);
             this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.tabControl);
@@ -678,18 +644,13 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.projectPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.projects)).EndInit();
-            this.employeePage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.employees)).EndInit();
-            this.customerPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.customers)).EndInit();
             this.projectPanel.ResumeLayout(false);
             this.projectPanel.PerformLayout();
             this.employeePanel.ResumeLayout(false);
             this.employeePanel.PerformLayout();
             this.customerPanel.ResumeLayout(false);
             this.customerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -752,14 +713,12 @@
         private System.Windows.Forms.ToolStripMenuItem financeDocumentation;
         private System.Windows.Forms.Label projectTypeLabel;
         private System.Windows.Forms.ComboBox projectType;
-        private System.Windows.Forms.DataGridView projects;
-        private System.Windows.Forms.DataGridView employees;
-        private System.Windows.Forms.DataGridView customers;
         private System.Windows.Forms.ComboBox projectStatus;
         private System.Windows.Forms.TextBox projectDoneDate;
         private System.Windows.Forms.TextBox projectStartDate;
         private System.Windows.Forms.TextBox employeeAcceptDate;
         private System.Windows.Forms.TextBox employeeBirthDate;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }
 

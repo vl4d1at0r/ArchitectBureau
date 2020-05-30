@@ -2,6 +2,7 @@
 using ArchitectBuroDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,8 @@ namespace ArchitectBuro
     public partial class MainForm : Form
     {
         public static List<Project> projectList;
+        public static List<Employee> employeeList;
+        public static List<Customer> customerList;
         public MainForm()
         {
             InitializeComponent();
@@ -56,10 +59,27 @@ namespace ArchitectBuro
                     projectStatus.Items.Add(item.Name);
                 }
                 projectList = db.Projects.ToList();
-                projects.DataSource = projectList;
-                employees.DataSource = db.Employees.ToList();
-                customers.DataSource = db.Customers.ToList();
+                employeeList = db.Employees.ToList();
+                customerList = db.Customers.ToList();
+                switch (tabControl.SelectedIndex)
+                {
+                    case 0:
+                        RefreshDataGridView(projectList);
+                        break;
+                    case 1:
+                        RefreshDataGridView(employeeList);
+                        break;
+                    case 2:
+                        RefreshDataGridView(customerList);
+                        break;
+                }
             }
+        }
+
+        public void RefreshDataGridView(object dataSource)
+        {
+            dataGridView.DataSource = null;
+            dataGridView.DataSource = dataSource;
         }
 
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
@@ -69,14 +89,17 @@ namespace ArchitectBuro
                 case 0:
                     employeePanel.SendToBack();
                     customerPanel.SendToBack();
+                    RefreshDataGridView(projectList);
                     break;
                 case 1:
                     projectPanel.SendToBack();
                     customerPanel.SendToBack();
+                    RefreshDataGridView(employeeList);
                     break;
                 case 2:
                     projectPanel.SendToBack();
                     employeePanel.SendToBack();
+                    RefreshDataGridView(customerList);
                     break;
             }
         }
@@ -86,18 +109,36 @@ namespace ArchitectBuro
             UpdateData();
         }
 
-        private void projects_KeyDown(object sender, KeyEventArgs e)
+        private void dataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                foreach (DataGridViewRow item in projects.SelectedRows)
+                using (MySQLApplicationContext db = new MySQLApplicationContext())
                 {
-                    projectList.RemoveAt(item.Index);
-                    projects.DataSource = null;
-                    projects.DataSource = projectList;
-                    projects.ClearSelection();
+                    foreach(DataGridViewRow item in dataGridView.SelectedRows)
+                        switch (tabControl.SelectedIndex)
+                        {
+                            case 0:
+                                db.Projects.Remove(projectList[item.Index]);
+                                break;
+                            case 1:
+                                db.Employees.Remove(employeeList[item.Index]);
+                                break;
+                            case 2:
+                                db.Customers.Remove(customerList[item.Index]);
+                                break;
+                        }
+                    db.SaveChanges();
+                    UpdateData();
+                    dataGridView.ClearSelection();
                 }
             }
+        }
+
+        private void addItem_Click(object sender, EventArgs e)
+        {
+            new AddForm().ShowDialog();
+            UpdateData();
         }
     }
 }

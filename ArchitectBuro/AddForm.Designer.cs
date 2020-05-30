@@ -45,6 +45,10 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "Проект",
+            "Сотрудник",
+            "Клиент"});
             this.comboBox1.Location = new System.Drawing.Point(139, 22);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(153, 21);
@@ -66,7 +70,7 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Name = "AddForm";
-            this.Text = "Додати";
+            this.Text = "Добавить";
             this.ResumeLayout(false);
             this.PerformLayout();
 
