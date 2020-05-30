@@ -30,13 +30,12 @@ namespace ArchitectBuro
         {
             using (MySQLApplicationContext db = new MySQLApplicationContext())
             {
-                foreach (var item in Controls)
-                {
-                    if (item is ComboBox)
-                    {
-                        (item as ComboBox).Items.Clear();
-                    }
-                }
+                projectType.Items.Clear();
+                employeePosition.Items.Clear();
+                employeeTeam.Items.Clear();
+                projectTeam.Items.Clear();
+                projectCustomer.Items.Clear();
+                projectStatus.Items.Clear();
                 foreach (ProjectType item in db.ProjectTypes)
                 {
                     projectType.Items.Add(item.Name);
@@ -137,7 +136,30 @@ namespace ArchitectBuro
 
         private void addItem_Click(object sender, EventArgs e)
         {
-            new AddForm().ShowDialog();
+            AddForm addForm = new AddForm();
+            addForm.Location = Location;
+            addForm.ShowDialog();
+            UpdateData();
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            object data = null;
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    data = projectList[e.RowIndex];
+                    break;
+                case 1:
+                    data = employeeList[e.RowIndex];
+                    break;
+                case 2:
+                    data = customerList[e.RowIndex];
+                    break;
+            }
+            AddForm addForm = new AddForm(true, tabControl.SelectedIndex, data);
+            addForm.Location = Location;
+            addForm.ShowDialog();
             UpdateData();
         }
     }

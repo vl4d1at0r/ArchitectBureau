@@ -80,8 +80,8 @@
             this.customerPanel = new System.Windows.Forms.Panel();
             this.customerPhone = new System.Windows.Forms.TextBox();
             this.customerPhoneLabel = new System.Windows.Forms.Label();
-            this.customerHomeAddress = new System.Windows.Forms.TextBox();
-            this.customerHomeAddressLabel = new System.Windows.Forms.Label();
+            this.customerEmail = new System.Windows.Forms.TextBox();
+            this.customerEmailLabel = new System.Windows.Forms.Label();
             this.customerSurname = new System.Windows.Forms.TextBox();
             this.customerSurnameLabel = new System.Windows.Forms.Label();
             this.customerName = new System.Windows.Forms.TextBox();
@@ -183,9 +183,9 @@
             // 
             // refreshButton
             // 
-            this.refreshButton.Location = new System.Drawing.Point(-1, 529);
+            this.refreshButton.Location = new System.Drawing.Point(0, 529);
             this.refreshButton.Name = "refreshButton";
-            this.refreshButton.Size = new System.Drawing.Size(168, 41);
+            this.refreshButton.Size = new System.Drawing.Size(167, 41);
             this.refreshButton.TabIndex = 2;
             this.refreshButton.Text = "Применить";
             this.refreshButton.UseVisualStyleBackColor = true;
@@ -201,6 +201,7 @@
             // 
             // projectPanel
             // 
+            this.projectPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.projectPanel.Controls.Add(this.projectDoneDate);
             this.projectPanel.Controls.Add(this.projectStartDate);
             this.projectPanel.Controls.Add(this.projectStatus);
@@ -229,7 +230,7 @@
             // 
             this.projectDoneDate.Location = new System.Drawing.Point(3, 138);
             this.projectDoneDate.Name = "projectDoneDate";
-            this.projectDoneDate.Size = new System.Drawing.Size(159, 20);
+            this.projectDoneDate.Size = new System.Drawing.Size(158, 20);
             this.projectDoneDate.TabIndex = 30;
             // 
             // projectStartDate
@@ -244,7 +245,7 @@
             this.projectStatus.FormattingEnabled = true;
             this.projectStatus.Location = new System.Drawing.Point(4, 178);
             this.projectStatus.Name = "projectStatus";
-            this.projectStatus.Size = new System.Drawing.Size(158, 21);
+            this.projectStatus.Size = new System.Drawing.Size(157, 21);
             this.projectStatus.TabIndex = 28;
             // 
             // projectTypeLabel
@@ -261,7 +262,7 @@
             this.projectType.FormattingEnabled = true;
             this.projectType.Location = new System.Drawing.Point(4, 330);
             this.projectType.Name = "projectType";
-            this.projectType.Size = new System.Drawing.Size(163, 21);
+            this.projectType.Size = new System.Drawing.Size(157, 21);
             this.projectType.TabIndex = 26;
             // 
             // projectCostEnd
@@ -276,7 +277,7 @@
             this.projectCustomer.FormattingEnabled = true;
             this.projectCustomer.Location = new System.Drawing.Point(3, 219);
             this.projectCustomer.Name = "projectCustomer";
-            this.projectCustomer.Size = new System.Drawing.Size(159, 21);
+            this.projectCustomer.Size = new System.Drawing.Size(158, 21);
             this.projectCustomer.TabIndex = 14;
             // 
             // projectCostStart
@@ -354,7 +355,7 @@
             this.projectTeam.FormattingEnabled = true;
             this.projectTeam.Location = new System.Drawing.Point(3, 59);
             this.projectTeam.Name = "projectTeam";
-            this.projectTeam.Size = new System.Drawing.Size(160, 21);
+            this.projectTeam.Size = new System.Drawing.Size(158, 21);
             this.projectTeam.TabIndex = 3;
             // 
             // projectTeamLabel
@@ -370,7 +371,7 @@
             // 
             this.projectName.Location = new System.Drawing.Point(3, 20);
             this.projectName.Name = "projectName";
-            this.projectName.Size = new System.Drawing.Size(161, 20);
+            this.projectName.Size = new System.Drawing.Size(158, 20);
             this.projectName.TabIndex = 1;
             // 
             // projectNameLabel
@@ -384,6 +385,7 @@
             // 
             // employeePanel
             // 
+            this.employeePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.employeePanel.Controls.Add(this.employeeAcceptDate);
             this.employeePanel.Controls.Add(this.employeeBirthDate);
             this.employeePanel.Controls.Add(this.employeeAcceptDateLabel);
@@ -409,14 +411,14 @@
             // 
             this.employeeAcceptDate.Location = new System.Drawing.Point(4, 285);
             this.employeeAcceptDate.Name = "employeeAcceptDate";
-            this.employeeAcceptDate.Size = new System.Drawing.Size(162, 20);
+            this.employeeAcceptDate.Size = new System.Drawing.Size(158, 20);
             this.employeeAcceptDate.TabIndex = 22;
             // 
             // employeeBirthDate
             // 
             this.employeeBirthDate.Location = new System.Drawing.Point(3, 73);
             this.employeeBirthDate.Name = "employeeBirthDate";
-            this.employeeBirthDate.Size = new System.Drawing.Size(162, 20);
+            this.employeeBirthDate.Size = new System.Drawing.Size(158, 20);
             this.employeeBirthDate.TabIndex = 21;
             // 
             // employeeAcceptDateLabel
@@ -432,7 +434,7 @@
             // 
             this.employeePhone.Location = new System.Drawing.Point(4, 242);
             this.employeePhone.Name = "employeePhone";
-            this.employeePhone.Size = new System.Drawing.Size(162, 20);
+            this.employeePhone.Size = new System.Drawing.Size(157, 20);
             this.employeePhone.TabIndex = 18;
             // 
             // employeePhoneLabel
@@ -448,7 +450,7 @@
             // 
             this.employeeHomeAddress.Location = new System.Drawing.Point(4, 202);
             this.employeeHomeAddress.Name = "employeeHomeAddress";
-            this.employeeHomeAddress.Size = new System.Drawing.Size(161, 20);
+            this.employeeHomeAddress.Size = new System.Drawing.Size(157, 20);
             this.employeeHomeAddress.TabIndex = 16;
             // 
             // employeeHomeAddressLabel
@@ -465,7 +467,7 @@
             this.employeePosition.FormattingEnabled = true;
             this.employeePosition.Location = new System.Drawing.Point(3, 158);
             this.employeePosition.Name = "employeePosition";
-            this.employeePosition.Size = new System.Drawing.Size(161, 21);
+            this.employeePosition.Size = new System.Drawing.Size(158, 21);
             this.employeePosition.TabIndex = 9;
             // 
             // employeePositionLabel
@@ -482,7 +484,7 @@
             this.employeeTeam.FormattingEnabled = true;
             this.employeeTeam.Location = new System.Drawing.Point(3, 114);
             this.employeeTeam.Name = "employeeTeam";
-            this.employeeTeam.Size = new System.Drawing.Size(162, 21);
+            this.employeeTeam.Size = new System.Drawing.Size(158, 21);
             this.employeeTeam.TabIndex = 7;
             // 
             // employeeTeamLabel
@@ -507,7 +509,7 @@
             // 
             this.employeeSurname.Location = new System.Drawing.Point(59, 27);
             this.employeeSurname.Name = "employeeSurname";
-            this.employeeSurname.Size = new System.Drawing.Size(105, 20);
+            this.employeeSurname.Size = new System.Drawing.Size(102, 20);
             this.employeeSurname.TabIndex = 3;
             // 
             // employeeSurnameLabel
@@ -523,7 +525,7 @@
             // 
             this.employeeName.Location = new System.Drawing.Point(59, 4);
             this.employeeName.Name = "employeeName";
-            this.employeeName.Size = new System.Drawing.Size(105, 20);
+            this.employeeName.Size = new System.Drawing.Size(102, 20);
             this.employeeName.TabIndex = 1;
             // 
             // employeeNameLabel
@@ -537,10 +539,11 @@
             // 
             // customerPanel
             // 
+            this.customerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.customerPanel.Controls.Add(this.customerPhone);
             this.customerPanel.Controls.Add(this.customerPhoneLabel);
-            this.customerPanel.Controls.Add(this.customerHomeAddress);
-            this.customerPanel.Controls.Add(this.customerHomeAddressLabel);
+            this.customerPanel.Controls.Add(this.customerEmail);
+            this.customerPanel.Controls.Add(this.customerEmailLabel);
             this.customerPanel.Controls.Add(this.customerSurname);
             this.customerPanel.Controls.Add(this.customerSurnameLabel);
             this.customerPanel.Controls.Add(this.customerName);
@@ -554,7 +557,7 @@
             // 
             this.customerPhone.Location = new System.Drawing.Point(4, 146);
             this.customerPhone.Name = "customerPhone";
-            this.customerPhone.Size = new System.Drawing.Size(161, 20);
+            this.customerPhone.Size = new System.Drawing.Size(157, 20);
             this.customerPhone.TabIndex = 7;
             // 
             // customerPhoneLabel
@@ -566,27 +569,27 @@
             this.customerPhoneLabel.TabIndex = 6;
             this.customerPhoneLabel.Text = "Телефон:";
             // 
-            // customerHomeAddress
+            // customerEmail
             // 
-            this.customerHomeAddress.Location = new System.Drawing.Point(4, 102);
-            this.customerHomeAddress.Name = "customerHomeAddress";
-            this.customerHomeAddress.Size = new System.Drawing.Size(161, 20);
-            this.customerHomeAddress.TabIndex = 5;
+            this.customerEmail.Location = new System.Drawing.Point(4, 102);
+            this.customerEmail.Name = "customerEmail";
+            this.customerEmail.Size = new System.Drawing.Size(157, 20);
+            this.customerEmail.TabIndex = 5;
             // 
-            // customerHomeAddressLabel
+            // customerEmailLabel
             // 
-            this.customerHomeAddressLabel.AutoSize = true;
-            this.customerHomeAddressLabel.Location = new System.Drawing.Point(4, 85);
-            this.customerHomeAddressLabel.Name = "customerHomeAddressLabel";
-            this.customerHomeAddressLabel.Size = new System.Drawing.Size(98, 13);
-            this.customerHomeAddressLabel.TabIndex = 4;
-            this.customerHomeAddressLabel.Text = "Домашний адрес:";
+            this.customerEmailLabel.AutoSize = true;
+            this.customerEmailLabel.Location = new System.Drawing.Point(4, 85);
+            this.customerEmailLabel.Name = "customerEmailLabel";
+            this.customerEmailLabel.Size = new System.Drawing.Size(40, 13);
+            this.customerEmailLabel.TabIndex = 4;
+            this.customerEmailLabel.Text = "Почта:";
             // 
             // customerSurname
             // 
             this.customerSurname.Location = new System.Drawing.Point(4, 60);
             this.customerSurname.Name = "customerSurname";
-            this.customerSurname.Size = new System.Drawing.Size(161, 20);
+            this.customerSurname.Size = new System.Drawing.Size(157, 20);
             this.customerSurname.TabIndex = 3;
             // 
             // customerSurnameLabel
@@ -602,7 +605,7 @@
             // 
             this.customerName.Location = new System.Drawing.Point(4, 21);
             this.customerName.Name = "customerName";
-            this.customerName.Size = new System.Drawing.Size(161, 20);
+            this.customerName.Size = new System.Drawing.Size(157, 20);
             this.customerName.TabIndex = 1;
             // 
             // customerNameLabel
@@ -623,6 +626,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(996, 521);
             this.dataGridView.TabIndex = 7;
+            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
             // MainForm
@@ -696,8 +700,8 @@
         private System.Windows.Forms.Label employeePhoneLabel;
         private System.Windows.Forms.TextBox customerPhone;
         private System.Windows.Forms.Label customerPhoneLabel;
-        private System.Windows.Forms.TextBox customerHomeAddress;
-        private System.Windows.Forms.Label customerHomeAddressLabel;
+        private System.Windows.Forms.TextBox customerEmail;
+        private System.Windows.Forms.Label customerEmailLabel;
         private System.Windows.Forms.TextBox customerSurname;
         private System.Windows.Forms.Label customerSurnameLabel;
         private System.Windows.Forms.TextBox customerName;
