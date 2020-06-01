@@ -41,6 +41,7 @@ namespace ArchitectBureau
                 {
                     projectType.Items.Add(item.Name);
                 }
+
                 foreach (Position item in db.Positions)
                 {
                     employeePosition.Items.Add(item.Name);
@@ -90,6 +91,7 @@ namespace ArchitectBureau
                     item.ProjectType.Name,
                     item.Customer.FirstName + " " + item.Customer.LastName
                 );
+                MarkOverdueProjects(dataGridView.Rows[dataGridView.Rows.GetLastRow(DataGridViewElementStates.None)]);
             }
         }
 
@@ -217,8 +219,11 @@ namespace ArchitectBureau
             addForm.ShowDialog();
             if (addForm.ReturnValues != null)
             {
-                dataGridView.Rows.Add(addForm.ReturnValues);
-                ReSort();
+                if (tabControl.SelectedIndex == addForm.createTypeComboBox.SelectedIndex)
+                {
+                    dataGridView.Rows.Add(addForm.ReturnValues);
+                    refreshButton_Click(this, EventArgs.Empty);
+                }
 
                 UpdateData();
             }
@@ -254,11 +259,9 @@ namespace ArchitectBureau
             if (addForm.ReturnValues != null)
             {
                 dataGridView.Rows[e.RowIndex].SetValues(addForm.ReturnValues);
-                ReSort();
-
+                refreshButton_Click(this, EventArgs.Empty);
                 UpdateData();
             }
-
         }
 
         private void ReSort()
@@ -286,6 +289,7 @@ namespace ArchitectBureau
                             item.Cells[5].Value.ToString().Contains(projectType.Text) &&
                             item.Cells[6].Value.ToString().Contains(projectCustomer.Text))
                         {
+                            MarkOverdueProjects(item);
                             item.Visible = true;
                         }
                         else
@@ -293,14 +297,17 @@ namespace ArchitectBureau
                             item.Visible = false;
                         }
                     }
+
                     break;
                 case 1:
                     foreach (DataGridViewRow item in dataGridView.Rows)
                     {
                         if (item.Cells[1].Value.ToString().Contains(employeeTeam.Text) &&
                             item.Cells[2].Value.ToString().Contains(employeePosition.Text) &&
-                            item.Cells[3].Value.ToString().Split(' ')[0].ToLower().Contains(employeeName.Text.ToLower()) &&
-                            item.Cells[3].Value.ToString().Split(' ')[1].ToLower().Contains(employeeSurname.Text.ToLower()) &&
+                            item.Cells[3].Value.ToString().Split(' ')[0].ToLower()
+                                .Contains(employeeName.Text.ToLower()) &&
+                            item.Cells[3].Value.ToString().Split(' ')[1].ToLower()
+                                .Contains(employeeSurname.Text.ToLower()) &&
                             item.Cells[4].Value.ToString().Contains(employeeBirthDate.Text) &&
                             item.Cells[5].Value.ToString().ToLower().Contains(employeeHomeAddress.Text.ToLower()) &&
                             item.Cells[6].Value.ToString().Contains(employeePhone.Text) &&
@@ -313,6 +320,7 @@ namespace ArchitectBureau
                             item.Visible = false;
                         }
                     }
+
                     break;
                 case 2:
                     foreach (DataGridViewRow item in dataGridView.Rows)
@@ -329,9 +337,32 @@ namespace ArchitectBureau
                             item.Visible = false;
                         }
                     }
+
                     break;
             }
+
             ReSort();
+        }
+
+        private static void MarkOverdueProjects(DataGridViewRow item)
+        {
+            if (item.Cells[4].Value.ToString() != @"Готово" && item.Cells[4].Value.ToString() != @"Отменено" &&
+                DateTime.Parse(item.Cells[3].Value.ToString()) <= DateTime.Today)
+            {
+                item.DefaultCellStyle.BackColor = Color.Red;
+            }
+            else
+            {
+                item.DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+
+        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
+                dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
+            }
         }
     }
 }

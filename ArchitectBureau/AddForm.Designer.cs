@@ -479,7 +479,7 @@
         #endregion
 
         private System.Windows.Forms.Label createTypeLabel;
-        private System.Windows.Forms.ComboBox createTypeComboBox;
+        public System.Windows.Forms.ComboBox createTypeComboBox;
         private System.Windows.Forms.Panel projectPanel;
         private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.ComboBox projectStatusComboBox;

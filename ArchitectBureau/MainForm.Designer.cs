@@ -30,7 +30,6 @@
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.addItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lateProjects = new System.Windows.Forms.ToolStripMenuItem();
             this.ratings = new System.Windows.Forms.ToolStripMenuItem();
             this.generateContract = new System.Windows.Forms.ToolStripMenuItem();
             this.financeDocumentation = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,7 +91,6 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItem,
-            this.lateProjects,
             this.ratings,
             this.generateContract,
             this.financeDocumentation});
@@ -108,12 +106,6 @@
             this.addItem.Size = new System.Drawing.Size(71, 20);
             this.addItem.Text = "Добавить";
             this.addItem.Click += new System.EventHandler(this.addItem_Click);
-            // 
-            // lateProjects
-            // 
-            this.lateProjects.Name = "lateProjects";
-            this.lateProjects.Size = new System.Drawing.Size(145, 20);
-            this.lateProjects.Text = "Задержанные проекты";
             // 
             // ratings
             // 
@@ -561,6 +553,7 @@
             this.dataGridView.Size = new System.Drawing.Size(996, 521);
             this.dataGridView.TabIndex = 7;
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
             // MainForm
@@ -635,7 +628,6 @@
         private System.Windows.Forms.Label customerSurnameLabel;
         private System.Windows.Forms.TextBox customerName;
         private System.Windows.Forms.Label customerNameLabel;
-        private System.Windows.Forms.ToolStripMenuItem lateProjects;
         private System.Windows.Forms.ToolStripMenuItem ratings;
         private System.Windows.Forms.ToolStripMenuItem generateContract;
         private System.Windows.Forms.ToolStripMenuItem financeDocumentation;

@@ -177,8 +177,8 @@ namespace ArchitectBureau
                     case 1:
                         Employee employee = new Employee()
                         {
-                            Team = _teams[employeeTeamComboBox.SelectedIndex],
-                            Position = _positions[employeePositionComboBox.SelectedIndex],
+                            TeamId = _teams[employeeTeamComboBox.SelectedIndex].Id,
+                            PositionId = _positions[employeePositionComboBox.SelectedIndex].Id,
                             FirstName = employeeFirstNameTextBox.Text,
                             LastName = employeeLastNameTextBox.Text,
                             BirthDate = employeeBirthDatePicker.Value,
