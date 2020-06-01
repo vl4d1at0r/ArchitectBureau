@@ -218,13 +218,7 @@ namespace ArchitectBureau
             if (addForm.ReturnValues != null)
             {
                 dataGridView.Rows.Add(addForm.ReturnValues);
-                if (dataGridView.SortedColumn != null)
-                {
-                    dataGridView.Sort(dataGridView.SortedColumn,
-                        dataGridView.SortOrder == SortOrder.Ascending
-                            ? ListSortDirection.Ascending
-                            : ListSortDirection.Descending);
-                }
+                ReSort();
 
                 UpdateData();
             }
@@ -260,17 +254,22 @@ namespace ArchitectBureau
             if (addForm.ReturnValues != null)
             {
                 dataGridView.Rows[e.RowIndex].SetValues(addForm.ReturnValues);
-                if (dataGridView.SortedColumn != null)
-                {
-                    dataGridView.Sort(dataGridView.SortedColumn,
-                        dataGridView.SortOrder == SortOrder.Ascending
-                            ? ListSortDirection.Ascending
-                            : ListSortDirection.Descending);
-                }
+                ReSort();
 
                 UpdateData();
             }
 
+        }
+
+        private void ReSort()
+        {
+            if (dataGridView.SortOrder != SortOrder.None)
+            {
+                dataGridView.Sort(dataGridView.SortedColumn,
+                    dataGridView.SortOrder == SortOrder.Ascending
+                        ? ListSortDirection.Ascending
+                        : ListSortDirection.Descending);
+            }
         }
 
         private void refreshButton_Click(object sender, EventArgs e)
@@ -278,23 +277,61 @@ namespace ArchitectBureau
             switch (tabControl.SelectedIndex)
             {
                 case 0:
-                    //foreach (DataGridViewRow item in dataGridView.Rows)
-                    //{
-                    //    if (item.Cells[1].Value.ToString() == projectTeam.SelectedItem.ToString() && projectTeam.SelectedItem.ToString() == "" && item.Cells[2].Value.ToString() == projectStartDate.Text && projectStartDate.Text != "")
-                    //    {
-                    //        item.Visible = true;
-                    //    }
-                    //    else
-                    //    {
-                    //        item.Visible = false;
-                    //    }
-                    //}
+                    foreach (DataGridViewRow item in dataGridView.Rows)
+                    {
+                        if (item.Cells[1].Value.ToString().Contains(projectTeam.Text) &&
+                            item.Cells[2].Value.ToString().Contains(projectStartDate.Text) &&
+                            item.Cells[3].Value.ToString().Contains(projectDoneDate.Text) &&
+                            item.Cells[4].Value.ToString().Contains(projectStatus.Text) &&
+                            item.Cells[5].Value.ToString().Contains(projectType.Text) &&
+                            item.Cells[6].Value.ToString().Contains(projectCustomer.Text))
+                        {
+                            item.Visible = true;
+                        }
+                        else
+                        {
+                            item.Visible = false;
+                        }
+                    }
                     break;
                 case 1:
+                    foreach (DataGridViewRow item in dataGridView.Rows)
+                    {
+                        if (item.Cells[1].Value.ToString().Contains(employeeTeam.Text) &&
+                            item.Cells[2].Value.ToString().Contains(employeePosition.Text) &&
+                            item.Cells[3].Value.ToString().Split(' ')[0].ToLower().Contains(employeeName.Text.ToLower()) &&
+                            item.Cells[3].Value.ToString().Split(' ')[1].ToLower().Contains(employeeSurname.Text.ToLower()) &&
+                            item.Cells[4].Value.ToString().Contains(employeeBirthDate.Text) &&
+                            item.Cells[5].Value.ToString().ToLower().Contains(employeeHomeAddress.Text.ToLower()) &&
+                            item.Cells[6].Value.ToString().Contains(employeePhone.Text) &&
+                            item.Cells[7].Value.ToString().Contains(employeeAcceptDate.Text))
+                        {
+                            item.Visible = true;
+                        }
+                        else
+                        {
+                            item.Visible = false;
+                        }
+                    }
                     break;
                 case 2:
+                    foreach (DataGridViewRow item in dataGridView.Rows)
+                    {
+                        if (item.Cells[1].Value.ToString().Split(' ')[0].ToLower().Contains(customerName.Text) &&
+                            item.Cells[1].Value.ToString().Split(' ')[1].ToLower().Contains(customerSurname.Text) &&
+                            item.Cells[2].Value.ToString().ToLower().Contains(customerEmail.Text.ToLower()) &&
+                            item.Cells[3].Value.ToString().Contains(customerPhone.Text))
+                        {
+                            item.Visible = true;
+                        }
+                        else
+                        {
+                            item.Visible = false;
+                        }
+                    }
                     break;
             }
+            ReSort();
         }
     }
 }

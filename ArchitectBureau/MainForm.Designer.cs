@@ -46,20 +46,13 @@
             this.projectStatus = new System.Windows.Forms.ComboBox();
             this.projectTypeLabel = new System.Windows.Forms.Label();
             this.projectType = new System.Windows.Forms.ComboBox();
-            this.projectCostEnd = new System.Windows.Forms.TextBox();
             this.projectCustomer = new System.Windows.Forms.ComboBox();
-            this.projectCostStart = new System.Windows.Forms.TextBox();
-            this.projectCostEndLabel = new System.Windows.Forms.Label();
             this.projectCustomerLabel = new System.Windows.Forms.Label();
-            this.projectCostLabel = new System.Windows.Forms.Label();
-            this.projectCostStartLabel = new System.Windows.Forms.Label();
             this.projectStatusLabel = new System.Windows.Forms.Label();
             this.projectDoneDateLabel = new System.Windows.Forms.Label();
             this.projectStartDateLabel = new System.Windows.Forms.Label();
             this.projectTeam = new System.Windows.Forms.ComboBox();
             this.projectTeamLabel = new System.Windows.Forms.Label();
-            this.projectName = new System.Windows.Forms.TextBox();
-            this.projectNameLabel = new System.Windows.Forms.Label();
             this.employeePanel = new System.Windows.Forms.Panel();
             this.employeeAcceptDate = new System.Windows.Forms.TextBox();
             this.employeeBirthDate = new System.Windows.Forms.TextBox();
@@ -208,20 +201,13 @@
             this.projectPanel.Controls.Add(this.projectStatus);
             this.projectPanel.Controls.Add(this.projectTypeLabel);
             this.projectPanel.Controls.Add(this.projectType);
-            this.projectPanel.Controls.Add(this.projectCostEnd);
             this.projectPanel.Controls.Add(this.projectCustomer);
-            this.projectPanel.Controls.Add(this.projectCostStart);
-            this.projectPanel.Controls.Add(this.projectCostEndLabel);
             this.projectPanel.Controls.Add(this.projectCustomerLabel);
-            this.projectPanel.Controls.Add(this.projectCostLabel);
-            this.projectPanel.Controls.Add(this.projectCostStartLabel);
             this.projectPanel.Controls.Add(this.projectStatusLabel);
             this.projectPanel.Controls.Add(this.projectDoneDateLabel);
             this.projectPanel.Controls.Add(this.projectStartDateLabel);
             this.projectPanel.Controls.Add(this.projectTeam);
             this.projectPanel.Controls.Add(this.projectTeamLabel);
-            this.projectPanel.Controls.Add(this.projectName);
-            this.projectPanel.Controls.Add(this.projectNameLabel);
             this.projectPanel.Location = new System.Drawing.Point(0, 49);
             this.projectPanel.Name = "projectPanel";
             this.projectPanel.Size = new System.Drawing.Size(168, 474);
@@ -229,14 +215,14 @@
             // 
             // projectDoneDate
             // 
-            this.projectDoneDate.Location = new System.Drawing.Point(3, 138);
+            this.projectDoneDate.Location = new System.Drawing.Point(2, 102);
             this.projectDoneDate.Name = "projectDoneDate";
             this.projectDoneDate.Size = new System.Drawing.Size(158, 20);
             this.projectDoneDate.TabIndex = 30;
             // 
             // projectStartDate
             // 
-            this.projectStartDate.Location = new System.Drawing.Point(3, 101);
+            this.projectStartDate.Location = new System.Drawing.Point(2, 65);
             this.projectStartDate.Name = "projectStartDate";
             this.projectStartDate.Size = new System.Drawing.Size(158, 20);
             this.projectStartDate.TabIndex = 29;
@@ -244,7 +230,7 @@
             // projectStatus
             // 
             this.projectStatus.FormattingEnabled = true;
-            this.projectStatus.Location = new System.Drawing.Point(4, 178);
+            this.projectStatus.Location = new System.Drawing.Point(3, 142);
             this.projectStatus.Name = "projectStatus";
             this.projectStatus.Size = new System.Drawing.Size(157, 21);
             this.projectStatus.TabIndex = 28;
@@ -252,7 +238,7 @@
             // projectTypeLabel
             // 
             this.projectTypeLabel.AutoSize = true;
-            this.projectTypeLabel.Location = new System.Drawing.Point(3, 314);
+            this.projectTypeLabel.Location = new System.Drawing.Point(2, 166);
             this.projectTypeLabel.Name = "projectTypeLabel";
             this.projectTypeLabel.Size = new System.Drawing.Size(73, 13);
             this.projectTypeLabel.TabIndex = 27;
@@ -261,73 +247,32 @@
             // projectType
             // 
             this.projectType.FormattingEnabled = true;
-            this.projectType.Location = new System.Drawing.Point(4, 330);
+            this.projectType.Location = new System.Drawing.Point(3, 182);
             this.projectType.Name = "projectType";
             this.projectType.Size = new System.Drawing.Size(157, 21);
             this.projectType.TabIndex = 26;
             // 
-            // projectCostEnd
-            // 
-            this.projectCostEnd.Location = new System.Drawing.Point(33, 285);
-            this.projectCostEnd.Name = "projectCostEnd";
-            this.projectCostEnd.Size = new System.Drawing.Size(128, 20);
-            this.projectCostEnd.TabIndex = 25;
-            // 
             // projectCustomer
             // 
             this.projectCustomer.FormattingEnabled = true;
-            this.projectCustomer.Location = new System.Drawing.Point(3, 219);
+            this.projectCustomer.Location = new System.Drawing.Point(4, 219);
             this.projectCustomer.Name = "projectCustomer";
             this.projectCustomer.Size = new System.Drawing.Size(158, 21);
             this.projectCustomer.TabIndex = 14;
             // 
-            // projectCostStart
-            // 
-            this.projectCostStart.Location = new System.Drawing.Point(33, 262);
-            this.projectCostStart.Name = "projectCostStart";
-            this.projectCostStart.Size = new System.Drawing.Size(128, 20);
-            this.projectCostStart.TabIndex = 23;
-            // 
-            // projectCostEndLabel
-            // 
-            this.projectCostEndLabel.AutoSize = true;
-            this.projectCostEndLabel.Location = new System.Drawing.Point(3, 288);
-            this.projectCostEndLabel.Name = "projectCostEndLabel";
-            this.projectCostEndLabel.Size = new System.Drawing.Size(22, 13);
-            this.projectCostEndLabel.TabIndex = 24;
-            this.projectCostEndLabel.Text = "до:";
-            // 
             // projectCustomerLabel
             // 
             this.projectCustomerLabel.AutoSize = true;
-            this.projectCustomerLabel.Location = new System.Drawing.Point(2, 203);
+            this.projectCustomerLabel.Location = new System.Drawing.Point(3, 203);
             this.projectCustomerLabel.Name = "projectCustomerLabel";
             this.projectCustomerLabel.Size = new System.Drawing.Size(46, 13);
             this.projectCustomerLabel.TabIndex = 13;
             this.projectCustomerLabel.Text = "Клиент:";
             // 
-            // projectCostLabel
-            // 
-            this.projectCostLabel.AutoSize = true;
-            this.projectCostLabel.Location = new System.Drawing.Point(3, 245);
-            this.projectCostLabel.Name = "projectCostLabel";
-            this.projectCostLabel.Size = new System.Drawing.Size(36, 13);
-            this.projectCostLabel.TabIndex = 21;
-            this.projectCostLabel.Text = "Цена:";
-            // 
-            // projectCostStartLabel
-            // 
-            this.projectCostStartLabel.AutoSize = true;
-            this.projectCostStartLabel.Location = new System.Drawing.Point(3, 265);
-            this.projectCostStartLabel.Name = "projectCostStartLabel";
-            this.projectCostStartLabel.Size = new System.Drawing.Size(21, 13);
-            this.projectCostStartLabel.TabIndex = 22;
-            this.projectCostStartLabel.Text = "от:";
-            // 
             // projectStatusLabel
             // 
             this.projectStatusLabel.AutoSize = true;
-            this.projectStatusLabel.Location = new System.Drawing.Point(4, 161);
+            this.projectStatusLabel.Location = new System.Drawing.Point(3, 125);
             this.projectStatusLabel.Name = "projectStatusLabel";
             this.projectStatusLabel.Size = new System.Drawing.Size(44, 13);
             this.projectStatusLabel.TabIndex = 8;
@@ -336,7 +281,7 @@
             // projectDoneDateLabel
             // 
             this.projectDoneDateLabel.AutoSize = true;
-            this.projectDoneDateLabel.Location = new System.Drawing.Point(3, 122);
+            this.projectDoneDateLabel.Location = new System.Drawing.Point(2, 86);
             this.projectDoneDateLabel.Name = "projectDoneDateLabel";
             this.projectDoneDateLabel.Size = new System.Drawing.Size(101, 13);
             this.projectDoneDateLabel.TabIndex = 6;
@@ -345,7 +290,7 @@
             // projectStartDateLabel
             // 
             this.projectStartDateLabel.AutoSize = true;
-            this.projectStartDateLabel.Location = new System.Drawing.Point(3, 83);
+            this.projectStartDateLabel.Location = new System.Drawing.Point(2, 47);
             this.projectStartDateLabel.Name = "projectStartDateLabel";
             this.projectStartDateLabel.Size = new System.Drawing.Size(75, 13);
             this.projectStartDateLabel.TabIndex = 5;
@@ -354,7 +299,7 @@
             // projectTeam
             // 
             this.projectTeam.FormattingEnabled = true;
-            this.projectTeam.Location = new System.Drawing.Point(3, 59);
+            this.projectTeam.Location = new System.Drawing.Point(2, 23);
             this.projectTeam.Name = "projectTeam";
             this.projectTeam.Size = new System.Drawing.Size(158, 21);
             this.projectTeam.TabIndex = 3;
@@ -362,27 +307,11 @@
             // projectTeamLabel
             // 
             this.projectTeamLabel.AutoSize = true;
-            this.projectTeamLabel.Location = new System.Drawing.Point(3, 43);
+            this.projectTeamLabel.Location = new System.Drawing.Point(2, 7);
             this.projectTeamLabel.Name = "projectTeamLabel";
             this.projectTeamLabel.Size = new System.Drawing.Size(55, 13);
             this.projectTeamLabel.TabIndex = 2;
             this.projectTeamLabel.Text = "Команда:";
-            // 
-            // projectName
-            // 
-            this.projectName.Location = new System.Drawing.Point(3, 20);
-            this.projectName.Name = "projectName";
-            this.projectName.Size = new System.Drawing.Size(158, 20);
-            this.projectName.TabIndex = 1;
-            // 
-            // projectNameLabel
-            // 
-            this.projectNameLabel.AutoSize = true;
-            this.projectNameLabel.Location = new System.Drawing.Point(4, 4);
-            this.projectNameLabel.Name = "projectNameLabel";
-            this.projectNameLabel.Size = new System.Drawing.Size(42, 13);
-            this.projectNameLabel.TabIndex = 0;
-            this.projectNameLabel.Text = "Назва:";
             // 
             // employeePanel
             // 
@@ -679,8 +608,6 @@
         private System.Windows.Forms.Panel customerPanel;
         private System.Windows.Forms.ComboBox projectTeam;
         private System.Windows.Forms.Label projectTeamLabel;
-        private System.Windows.Forms.TextBox projectName;
-        private System.Windows.Forms.Label projectNameLabel;
         private System.Windows.Forms.Label projectStartDateLabel;
         private System.Windows.Forms.Label projectStatusLabel;
         private System.Windows.Forms.Label projectDoneDateLabel;
@@ -709,11 +636,6 @@
         private System.Windows.Forms.TextBox customerName;
         private System.Windows.Forms.Label customerNameLabel;
         private System.Windows.Forms.ToolStripMenuItem lateProjects;
-        private System.Windows.Forms.TextBox projectCostEnd;
-        private System.Windows.Forms.TextBox projectCostStart;
-        private System.Windows.Forms.Label projectCostEndLabel;
-        private System.Windows.Forms.Label projectCostLabel;
-        private System.Windows.Forms.Label projectCostStartLabel;
         private System.Windows.Forms.ToolStripMenuItem ratings;
         private System.Windows.Forms.ToolStripMenuItem generateContract;
         private System.Windows.Forms.ToolStripMenuItem financeDocumentation;
