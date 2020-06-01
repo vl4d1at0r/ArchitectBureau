@@ -1,26 +1,20 @@
-﻿using ArchitectBuroDataAccess;
-using ArchitectBuroDataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ArchitectBureauDataAccess;
+using ArchitectBureauDataAccess.Models;
 
-
-namespace ArchitectBuro
+namespace ArchitectBureau
 {
     public partial class MainForm : Form
     {
-        public static List<Project> projectList;
-        public static List<Employee> employeeList;
-        public static List<Customer> customerList;
+        private List<Project> _projectList;
+        private List<Employee> _employeeList;
+        private List<Customer> _customerList;
+
         public MainForm()
         {
             InitializeComponent();
@@ -28,7 +22,7 @@ namespace ArchitectBuro
 
         public void UpdateData()
         {
-            using (MySQLApplicationContext db = new MySQLApplicationContext())
+            using (MySqlApplicationContext db = new MySqlApplicationContext())
             {
                 projectType.Items.Clear();
                 employeePosition.Items.Clear();
@@ -36,6 +30,13 @@ namespace ArchitectBuro
                 projectTeam.Items.Clear();
                 projectCustomer.Items.Clear();
                 projectStatus.Items.Clear();
+                projectType.Items.Add("");
+                employeePosition.Items.Add("");
+                employeeTeam.Items.Add("");
+                projectTeam.Items.Add("");
+                projectCustomer.Items.Add("");
+                projectStatus.Items.Add("");
+
                 foreach (ProjectType item in db.ProjectTypes)
                 {
                     projectType.Items.Add(item.Name);
@@ -44,34 +45,26 @@ namespace ArchitectBuro
                 {
                     employeePosition.Items.Add(item.Name);
                 }
+
                 foreach (Team item in db.Teams)
                 {
                     employeeTeam.Items.Add(item.Name);
                     projectTeam.Items.Add(item.Name);
                 }
+
                 foreach (Customer item in db.Customers)
                 {
                     projectCustomer.Items.Add(item.FirstName + " " + item.LastName);
                 }
+
                 foreach (ProjectStatus item in db.ProjectStatuses)
                 {
                     projectStatus.Items.Add(item.Name);
                 }
-                projectList = db.Projects.ToList();
-                employeeList = db.Employees.ToList();
-                customerList = db.Customers.ToList();
-                switch (tabControl.SelectedIndex)
-                {
-                    case 0:
-                        RefreshDataGridView(projectList);
-                        break;
-                    case 1:
-                        RefreshDataGridView(employeeList);
-                        break;
-                    case 2:
-                        RefreshDataGridView(customerList);
-                        break;
-                }
+
+                _projectList = db.Projects.ToList();
+                _employeeList = db.Employees.ToList();
+                _customerList = db.Customers.ToList();
             }
         }
 
@@ -96,7 +89,7 @@ namespace ArchitectBuro
                     item.ProjectStatus.Name,
                     item.ProjectType.Name,
                     item.Customer.FirstName + " " + item.Customer.LastName
-                    );
+                );
             }
         }
 
@@ -111,7 +104,7 @@ namespace ArchitectBuro
             dataGridView.Columns[4].Name = "Дата рождения";
             dataGridView.Columns[5].Name = "Домашний адрес";
             dataGridView.Columns[6].Name = "Телефон";
-            dataGridView.Columns[7].Name = "Дата приёма";
+            dataGridView.Columns[7].Name = "Дата вступления";
             foreach (Employee item in dataSource)
             {
                 dataGridView.Rows.Add(
@@ -123,7 +116,7 @@ namespace ArchitectBuro
                     item.HomeAddress,
                     item.Phone,
                     item.ApplyDate.ToString("dd.MM.yyyy")
-                    );
+                );
             }
         }
 
@@ -142,7 +135,7 @@ namespace ArchitectBuro
                     item.FirstName + " " + item.LastName,
                     item.Email,
                     item.Phone
-                    );
+                );
             }
         }
 
@@ -153,17 +146,17 @@ namespace ArchitectBuro
                 case 0:
                     employeePanel.SendToBack();
                     customerPanel.SendToBack();
-                    RefreshDataGridView(projectList);
+                    RefreshDataGridView(_projectList);
                     break;
                 case 1:
                     projectPanel.SendToBack();
                     customerPanel.SendToBack();
-                    RefreshDataGridView(employeeList);
+                    RefreshDataGridView(_employeeList);
                     break;
                 case 2:
                     projectPanel.SendToBack();
                     employeePanel.SendToBack();
-                    RefreshDataGridView(customerList);
+                    RefreshDataGridView(_customerList);
                     break;
             }
         }
@@ -171,61 +164,137 @@ namespace ArchitectBuro
         private void MainForm_Load(object sender, EventArgs e)
         {
             UpdateData();
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    RefreshDataGridView(_projectList);
+                    break;
+                case 1:
+                    RefreshDataGridView(_employeeList);
+                    break;
+                case 2:
+                    RefreshDataGridView(_customerList);
+                    break;
+            }
         }
 
         private void dataGridView_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
-                using (MySQLApplicationContext db = new MySQLApplicationContext())
+                using (MySqlApplicationContext db = new MySqlApplicationContext())
                 {
-                    foreach(DataGridViewRow item in dataGridView.SelectedRows)
+                    foreach (DataGridViewRow item in dataGridView.SelectedRows)
+                    {
                         switch (tabControl.SelectedIndex)
                         {
                             case 0:
-                                db.Projects.Remove(projectList[item.Index]);
+                                db.Projects.Remove(_projectList.Find(search =>
+                                    search.Id == int.Parse(item.Cells[0].Value.ToString())));
                                 break;
                             case 1:
-                                db.Employees.Remove(employeeList[item.Index]);
+                                db.Employees.Remove(_employeeList.Find(search =>
+                                    search.Id == int.Parse(item.Cells[0].Value.ToString())));
                                 break;
                             case 2:
-                                db.Customers.Remove(customerList[item.Index]);
+                                db.Customers.Remove(_customerList.Find(search =>
+                                    search.Id == int.Parse(item.Cells[0].Value.ToString())));
                                 break;
                         }
+
+                        dataGridView.Rows.Remove(item);
+                    }
+
                     db.SaveChanges();
                     UpdateData();
-                    dataGridView.ClearSelection();
                 }
             }
         }
 
         private void addItem_Click(object sender, EventArgs e)
         {
-            AddForm addForm = new AddForm();
-            addForm.Location = Location;
+            AddForm addForm = new AddForm(Location);
             addForm.ShowDialog();
-            UpdateData();
+            if (addForm.ReturnValues != null)
+            {
+                dataGridView.Rows.Add(addForm.ReturnValues);
+                if (dataGridView.SortedColumn != null)
+                {
+                    dataGridView.Sort(dataGridView.SortedColumn,
+                        dataGridView.SortOrder == SortOrder.Ascending
+                            ? ListSortDirection.Ascending
+                            : ListSortDirection.Descending);
+                }
+
+                UpdateData();
+            }
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1)
+            {
+                return;
+            }
+
             object data = null;
             switch (tabControl.SelectedIndex)
             {
                 case 0:
-                    data = projectList[e.RowIndex];
+                    data = _projectList.Find(search =>
+                        search.Id == int.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()));
                     break;
                 case 1:
-                    data = employeeList[e.RowIndex];
+                    data = _employeeList.Find(search =>
+                        search.Id == int.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()));
                     break;
                 case 2:
-                    data = customerList[e.RowIndex];
+                    data = _customerList.Find(search =>
+                        search.Id == int.Parse(dataGridView.Rows[e.RowIndex].Cells[0].Value.ToString()));
                     break;
             }
-            AddForm addForm = new AddForm(true, tabControl.SelectedIndex, data);
-            addForm.Location = Location;
+
+            AddForm addForm = new AddForm(new Point(Cursor.Position.X - 100, Cursor.Position.Y - 50), true,
+                tabControl.SelectedIndex, data);
             addForm.ShowDialog();
-            UpdateData();
+            if (addForm.ReturnValues != null)
+            {
+                dataGridView.Rows[e.RowIndex].SetValues(addForm.ReturnValues);
+                if (dataGridView.SortedColumn != null)
+                {
+                    dataGridView.Sort(dataGridView.SortedColumn,
+                        dataGridView.SortOrder == SortOrder.Ascending
+                            ? ListSortDirection.Ascending
+                            : ListSortDirection.Descending);
+                }
+
+                UpdateData();
+            }
+
+        }
+
+        private void refreshButton_Click(object sender, EventArgs e)
+        {
+            switch (tabControl.SelectedIndex)
+            {
+                case 0:
+                    //foreach (DataGridViewRow item in dataGridView.Rows)
+                    //{
+                    //    if (item.Cells[1].Value.ToString() == projectTeam.SelectedItem.ToString() && projectTeam.SelectedItem.ToString() == "" && item.Cells[2].Value.ToString() == projectStartDate.Text && projectStartDate.Text != "")
+                    //    {
+                    //        item.Visible = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        item.Visible = false;
+                    //    }
+                    //}
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
         }
     }
 }

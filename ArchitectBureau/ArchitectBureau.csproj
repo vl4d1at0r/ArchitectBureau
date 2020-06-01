@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3E6ED387-5EED-4F11-96EA-05B834A12EAA}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ArchitectBuro</RootNamespace>
-    <AssemblyName>ArchitectBuro</AssemblyName>
+    <RootNamespace>ArchitectBureau</RootNamespace>
+    <AssemblyName>ArchitectBureau</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -176,6 +176,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -204,9 +205,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArchitectBuroDataAccess\ArchitectBuroDataAccess.csproj">
-      <Project>{06b08cb2-12f4-4593-8cd1-ccc2dfdb172c}</Project>
-      <Name>ArchitectBuroDataAccess</Name>
+    <ProjectReference Include="..\ArchitectBureauDataAccess\ArchitectBureauDataAccess.csproj">
+      <Project>{d16b3eef-18ef-4dda-bbe0-3e8a6817b2b9}</Project>
+      <Name>ArchitectBureauDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

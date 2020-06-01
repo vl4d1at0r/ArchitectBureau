@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BF92A77D-8572-4B56-81E5-FCBA9D4BAFF1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ArchitectBuroSeeder</RootNamespace>
-    <AssemblyName>ArchitectBuroSeeder</AssemblyName>
+    <RootNamespace>ArchitectBureauSeeder</RootNamespace>
+    <AssemblyName>ArchitectBureauSeeder</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -141,9 +141,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArchitectBuroDataAccess\ArchitectBuroDataAccess.csproj">
-      <Project>{06b08cb2-12f4-4593-8cd1-ccc2dfdb172c}</Project>
-      <Name>ArchitectBuroDataAccess</Name>
+    <ProjectReference Include="..\ArchitectBureauDataAccess\ArchitectBureauDataAccess.csproj">
+      <Project>{d16b3eef-18ef-4dda-bbe0-3e8a6817b2b9}</Project>
+      <Name>ArchitectBureauDataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,4 +1,4 @@
-﻿namespace ArchitectBuro
+﻿namespace ArchitectBureau
 {
     partial class MainForm
     {
@@ -189,6 +189,7 @@
             this.refreshButton.TabIndex = 2;
             this.refreshButton.Text = "Применить";
             this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
             // 
             // filterLabel
             // 
@@ -620,8 +621,12 @@
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
+            this.dataGridView.AllowUserToOrderColumns = true;
+            this.dataGridView.AllowUserToResizeColumns = false;
+            this.dataGridView.AllowUserToResizeRows = false;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView.Location = new System.Drawing.Point(170, 49);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(996, 521);
@@ -661,9 +666,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.Label architectBuroLabel;
-        private System.Windows.Forms.Panel MenuPanel;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem addItem;
         private System.Windows.Forms.TabControl tabControl;

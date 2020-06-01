@@ -1,23 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArchitectBuroDataAccess;
-using ArchitectBuroDataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-using Bogus;
 using System.Threading;
-using Bogus.DataSets;
+using ArchitectBureauDataAccess;
+using ArchitectBureauDataAccess.Models;
+using Bogus;
+using Microsoft.EntityFrameworkCore;
 
-namespace ArchitectBuroSeeder
+namespace ArchitectBureauSeeder
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             Console.Write("Инициализация базы данных... ");
-            using (MySQLApplicationContext db = new MySQLApplicationContext())
+            using (MySqlApplicationContext db = new MySqlApplicationContext())
             {
                 Console.Write("OK\nУдаление старых данных... ");
                 db.Projects.RemoveRange(db.Projects);
@@ -46,40 +42,41 @@ namespace ArchitectBuroSeeder
                 Console.Write("OK\nДобавление типов проектов... ");
 
                 db.ProjectTypes.AddRange(
-                    new ProjectType() { Name = "Архитектура", Price = 1000, Term = 24 },
-                    new ProjectType() { Name = "Дизайн интерьеров", Price = 100, Term = 1 },
-                    new ProjectType() { Name = "Разработка концепции", Price = 50, Term = 1 },
-                    new ProjectType() { Name = "Проектирование", Price = 100, Term = 12 },
-                    new ProjectType() { Name = "Авторский надзор", Price = 100, Term = 1 },
-                    new ProjectType() { Name = "Согласование в службах", Price = 50, Term = 1 }
-                    );
+                    new ProjectType() {Name = "Архитектура", Price = 1000, Term = 24},
+                    new ProjectType() {Name = "Дизайн интерьеров", Price = 100, Term = 1},
+                    new ProjectType() {Name = "Разработка концепции", Price = 50, Term = 1},
+                    new ProjectType() {Name = "Проектирование", Price = 100, Term = 12},
+                    new ProjectType() {Name = "Авторский надзор", Price = 100, Term = 1},
+                    new ProjectType() {Name = "Согласование в службах", Price = 50, Term = 1}
+                );
                 db.SaveChanges();
                 Console.Write("OK\nДобавление статусов проектов... ");
 
                 db.ProjectStatuses.AddRange(
-                    new ProjectStatus() { Name = "Готово"},
-                    new ProjectStatus() { Name = "Отменено"},
-                    new ProjectStatus() { Name = "В процессе"},
-                    new ProjectStatus() { Name = "Не начато"}
-                    );
+                    new ProjectStatus() {Name = "Готово"},
+                    new ProjectStatus() {Name = "Отменено"},
+                    new ProjectStatus() {Name = "В процессе"},
+                    new ProjectStatus() {Name = "Не начато"}
+                );
                 db.SaveChanges();
                 Console.Write("OK\nДобавление должностей... ");
 
                 db.Positions.AddRange(
-                    new Position() { Name = "Архитектор" },
-                    new Position() { Name = "Директор" },
-                    new Position() { Name = "Строитель" },
-                    new Position() { Name = "Бухгалтер" },
-                    new Position() { Name = "Представитель банка" }
-                    );
+                    new Position() {Name = "Архитектор"},
+                    new Position() {Name = "Директор"},
+                    new Position() {Name = "Строитель"},
+                    new Position() {Name = "Бухгалтер"},
+                    new Position() {Name = "Представитель банка"}
+                );
                 db.SaveChanges();
                 Console.Write("OK\nГенерация команд... ");
 
                 for (int i = 0; i < 5; i++)
                 {
                     Faker faker = new Faker("ru");
-                    db.Teams.Add(new Team() { Name = faker.Address.City()});
+                    db.Teams.Add(new Team() {Name = faker.Address.City()});
                 }
+
                 db.SaveChanges();
                 Console.Write("OK\nГенерация сотрудников... ");
 
@@ -90,14 +87,15 @@ namespace ArchitectBuroSeeder
                     {
                         FirstName = faker.Person.FirstName,
                         LastName = faker.Person.LastName,
-                        ApplyDate = faker.Date.Past(1),
-                        BirthDate = faker.Date.Past(30,new DateTime(DateTime.Now.Year-18,1,1)),
+                        ApplyDate = faker.Date.Past(),
+                        BirthDate = faker.Date.Past(30, new DateTime(DateTime.Now.Year - 18, 1, 1)),
                         HomeAddress = faker.Address.FullAddress(),
                         Phone = faker.Phone.PhoneNumber(),
                         PositionId = faker.Random.Number(1, db.Positions.Count()),
                         TeamId = faker.Random.Number(1, db.Teams.Count())
                     });
                 }
+
                 db.SaveChanges();
                 Console.Write("OK\nГенерация клиентов... ");
 
@@ -112,6 +110,7 @@ namespace ArchitectBuroSeeder
                         Phone = faker.Phone.PhoneNumber()
                     });
                 }
+
                 db.SaveChanges();
                 Console.Write("OK\nГенерация проектов... ");
 
@@ -125,11 +124,13 @@ namespace ArchitectBuroSeeder
                         CustomerId = faker.Random.Number(1, db.Customers.Count()),
                         TeamId = teamId,
                         OrderDate = orderDate,
-                        FinishDate = faker.Date.Future(1, orderDate.AddMonths(db.ProjectTypes.ToList()[teamId - 1].Term)),
+                        FinishDate = faker.Date.Future(1,
+                            orderDate.AddMonths(db.ProjectTypes.ToList()[teamId - 1].Term)),
                         ProjectStatusId = faker.Random.Number(1, db.ProjectStatuses.Count()),
                         ProjectTypeId = faker.Random.Number(1, db.ProjectTypes.Count())
                     });
                 }
+
                 db.SaveChanges();
                 Console.Write("OK\nГенерация прошла успешно!");
                 Thread.Sleep(3000);

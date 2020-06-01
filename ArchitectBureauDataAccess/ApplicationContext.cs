@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ArchitectBureauDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using ArchitectBuroDataAccess.Models;
 
-namespace ArchitectBuroDataAccess
+namespace ArchitectBureauDataAccess
 {
     public class ApplicationContext : DbContext
     {

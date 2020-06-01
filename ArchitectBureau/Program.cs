@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using ArchitectBuroDataAccess;
+using ArchitectBureauDataAccess;
 
-namespace ArchitectBuro
+namespace ArchitectBureau
 {
     static class Program
     {
@@ -15,10 +12,7 @@ namespace ArchitectBuro
         [STAThread]
         static void Main()
         {
-            using (MySQLApplicationContext db = new MySQLApplicationContext())
-            {
-
-            }
+            new MySqlApplicationContext().Dispose();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
