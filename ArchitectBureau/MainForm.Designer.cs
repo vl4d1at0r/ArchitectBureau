@@ -30,9 +30,6 @@
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.addItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ratings = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateContract = new System.Windows.Forms.ToolStripMenuItem();
-            this.financeDocumentation = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectPage = new System.Windows.Forms.TabPage();
             this.employeePage = new System.Windows.Forms.TabPage();
@@ -90,10 +87,7 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addItem,
-            this.ratings,
-            this.generateContract,
-            this.financeDocumentation});
+            this.addItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1170, 24);
@@ -106,24 +100,6 @@
             this.addItem.Size = new System.Drawing.Size(71, 20);
             this.addItem.Text = "Добавить";
             this.addItem.Click += new System.EventHandler(this.addItem_Click);
-            // 
-            // ratings
-            // 
-            this.ratings.Name = "ratings";
-            this.ratings.Size = new System.Drawing.Size(63, 20);
-            this.ratings.Text = "Рейтинг";
-            // 
-            // generateContract
-            // 
-            this.generateContract.Name = "generateContract";
-            this.generateContract.Size = new System.Drawing.Size(123, 20);
-            this.generateContract.Text = "Составить договор";
-            // 
-            // financeDocumentation
-            // 
-            this.financeDocumentation.Name = "financeDocumentation";
-            this.financeDocumentation.Size = new System.Drawing.Size(167, 20);
-            this.financeDocumentation.Text = "Финансовая документация";
             // 
             // tabControl
             // 
@@ -154,7 +130,7 @@
             this.employeePage.Padding = new System.Windows.Forms.Padding(3);
             this.employeePage.Size = new System.Drawing.Size(992, 0);
             this.employeePage.TabIndex = 1;
-            this.employeePage.Text = "Співробітники";
+            this.employeePage.Text = "Сотрудники";
             this.employeePage.UseVisualStyleBackColor = true;
             // 
             // customerPage
@@ -628,9 +604,6 @@
         private System.Windows.Forms.Label customerSurnameLabel;
         private System.Windows.Forms.TextBox customerName;
         private System.Windows.Forms.Label customerNameLabel;
-        private System.Windows.Forms.ToolStripMenuItem ratings;
-        private System.Windows.Forms.ToolStripMenuItem generateContract;
-        private System.Windows.Forms.ToolStripMenuItem financeDocumentation;
         private System.Windows.Forms.Label projectTypeLabel;
         private System.Windows.Forms.ComboBox projectType;
         private System.Windows.Forms.ComboBox projectStatus;

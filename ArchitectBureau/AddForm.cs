@@ -153,15 +153,17 @@ namespace ArchitectBureau
                                     _projectTypes[projectTypeComboBox.SelectedIndex].Term),
                             ProjectStatusId = _projectStatuses[projectStatusComboBox.SelectedIndex].Id,
                             ProjectTypeId = _projectTypes[projectTypeComboBox.SelectedIndex].Id,
-                            CustomerId = _customers[projectCustomerComboBox.SelectedIndex].Id
+                            CustomerId = _customers[projectCustomerComboBox.SelectedIndex].Id,
                         };
                         db.Projects.Add(project);
                         db.SaveChanges();
                         project = db.Projects
                             .Include(item => item.Team)
+                                .ThenInclude(item => item.Employees)
                             .Include(item => item.ProjectStatus)
                             .Include(item => item.ProjectType)
                             .Include(item => item.Customer)
+                                .ThenInclude(item => item.Projects)
                             .First(item => item.Id == project.Id);
                         ReturnValues = new object[]
                         {
@@ -171,7 +173,8 @@ namespace ArchitectBureau
                             project.FinishDate.ToString("dd.MM.yyyy"),
                             project.ProjectStatus.Name,
                             project.ProjectType.Name,
-                            project.Customer.FirstName + " " + project.Customer.LastName
+                            project.Customer.FirstName + " " + project.Customer.LastName,
+                            project.Team.Employees.Count + project.Customer.Projects.Count + project.ProjectType.Price
                         };
                         break;
                     case 1:
@@ -201,7 +204,8 @@ namespace ArchitectBureau
                             employee.BirthDate.ToString("dd.MM.yyyy"),
                             employee.HomeAddress,
                             employee.Phone,
-                            employee.ApplyDate.ToString("dd.MM.yyyy")
+                            employee.ApplyDate.ToString("dd.MM.yyyy"),
+                            (DateTime.Today - employee.ApplyDate).Days
                         };
                         break;
                     case 2:
@@ -214,12 +218,16 @@ namespace ArchitectBureau
                         };
                         db.Customers.Add(customer);
                         db.SaveChanges();
+                        customer = db.Customers
+                            .Include(item => item.Projects)
+                            .First(item => item.Id == customer.Id);
                         ReturnValues = new object[]
                         {
                             customer.Id,
                             customer.FirstName + " " + customer.LastName,
                             customer.Email,
-                            customer.Phone
+                            customer.Phone,
+                            customer.Projects.Count
                         };
                         break;
                 }
@@ -243,6 +251,15 @@ namespace ArchitectBureau
                         project.OrderDate = projectOrderDatePicker.Value;
                         project.FinishDate =
                             project.OrderDate.AddMonths(_projectTypes[projectTypeComboBox.SelectedIndex].Term);
+                        db.SaveChanges();
+                        project = db.Projects
+                            .Include(item => item.Team)
+                                .ThenInclude(item => item.Employees)
+                            .Include(item => item.ProjectStatus)
+                            .Include(item => item.ProjectType)
+                            .Include(item => item.Customer)
+                                .ThenInclude(item => item.Projects)
+                            .First(item => item.Id == project.Id);
                         ReturnValues = new object[]
                         {
                             project.Id,
@@ -251,7 +268,8 @@ namespace ArchitectBureau
                             project.FinishDate.ToString("dd.MM.yyyy"),
                             project.ProjectStatus.Name,
                             project.ProjectType.Name,
-                            project.Customer.FirstName + " " + project.Customer.LastName
+                            project.Customer.FirstName + " " + project.Customer.LastName,
+                            project.Team.Employees.Count + project.Customer.Projects.Count + project.ProjectType.Price
                         };
                         break;
                     case 1:
@@ -273,7 +291,8 @@ namespace ArchitectBureau
                             employee.BirthDate.ToString("dd.MM.yyyy"),
                             employee.HomeAddress,
                             employee.Phone,
-                            employee.ApplyDate.ToString("dd.MM.yyyy")
+                            employee.ApplyDate.ToString("dd.MM.yyyy"),
+                            (DateTime.Today - employee.ApplyDate).Days
                         };
                         break;
                     case 2:
@@ -282,12 +301,17 @@ namespace ArchitectBureau
                         customer.LastName = customerLastNameTextBox.Text;
                         customer.Email = customerEmailTextBox.Text;
                         customer.Phone = customerPhoneTextBox.Text;
+                        db.SaveChanges();
+                        customer = db.Customers
+                            .Include(item => item.Projects)
+                            .First(item => item.Id == customer.Id);
                         ReturnValues = new object[]
                         {
                             customer.Id,
                             customer.FirstName + " " + customer.LastName,
                             customer.Email,
-                            customer.Phone
+                            customer.Phone,
+                            customer.Projects.Count
                         };
                         break;
                 }
