@@ -7,6 +7,8 @@ using System.Windows.Forms;
 using ArchitectBureauDataAccess;
 using ArchitectBureauDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace ArchitectBureau
 {
@@ -370,6 +372,42 @@ namespace ArchitectBureau
             {
                 dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
             }
+        }
+
+        private void allPrice_Click(object sender, EventArgs e)
+        {
+            new PriceForm().ShowDialog();
+        }
+
+        private void reportItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.ShowDialog();
+            DocX document = DocX.Create(saveFileDialog.FileName);
+            Paragraph paragraph = document.InsertParagraph();
+            paragraph.FontSize(14);
+            paragraph.Append(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"));
+            paragraph.AppendLine("Отчет за месяц").Alignment = Alignment.center;
+            Paragraph content = document.InsertParagraph();
+            using (MySqlApplicationContext db = new MySqlApplicationContext())
+            {
+                content.Append("Количество выполненных проектов:");
+                foreach (ProjectType item in db.ProjectTypes.Include(item => item.Projects)
+                    .ThenInclude(item => item.ProjectStatus).ToList())
+                {
+                    content.AppendLine(item.Name + ": " + item.Projects.Count(project =>
+                        project.ProjectStatus.Name == "Готово" &&
+                        project.FinishDate.Month == DateTime.Now.Month));
+                }
+
+                content.AppendLine("Заработано денег: " + db.Projects.Include(item => item.ProjectType)
+                    .Include(item => item.ProjectStatus)
+                    .Where(item =>
+                        item.FinishDate.Month == DateTime.Now.Month &&
+                        item.ProjectStatus.Name == "Готово")
+                    .Sum(item => item.ProjectType.Price));
+            }
+
+            document.Save();
         }
     }
 }

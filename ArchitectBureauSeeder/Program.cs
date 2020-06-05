@@ -99,7 +99,7 @@ namespace ArchitectBureauSeeder
                 db.SaveChanges();
                 Console.Write("OK\nГенерация клиентов... ");
 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     Faker faker = new Faker("ru");
                     db.Customers.Add(new Customer()
@@ -114,10 +114,11 @@ namespace ArchitectBureauSeeder
                 db.SaveChanges();
                 Console.Write("OK\nГенерация проектов... ");
 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 100; i++)
                 {
                     Faker faker = new Faker("ru");
                     int teamId = faker.Random.Number(1, db.Teams.Count());
+                    int projectTypeId = faker.Random.Number(1, db.ProjectTypes.Count());
                     DateTime orderDate = faker.Date.Past(1, new DateTime(DateTime.Now.Year, 1, 1));
                     db.Projects.Add(new Project()
                     {
@@ -125,9 +126,9 @@ namespace ArchitectBureauSeeder
                         TeamId = teamId,
                         OrderDate = orderDate,
                         FinishDate = faker.Date.Future(1,
-                            orderDate.AddMonths(db.ProjectTypes.ToList()[teamId - 1].Term)),
+                            orderDate.AddMonths(db.ProjectTypes.ToList()[projectTypeId - 1].Term)),
                         ProjectStatusId = faker.Random.Number(1, db.ProjectStatuses.Count()),
-                        ProjectTypeId = faker.Random.Number(1, db.ProjectTypes.Count())
+                        ProjectTypeId = projectTypeId
                     });
                 }
 

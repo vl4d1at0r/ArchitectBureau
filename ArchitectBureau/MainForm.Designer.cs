@@ -30,6 +30,7 @@
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.addItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.allPrice = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectPage = new System.Windows.Forms.TabPage();
             this.employeePage = new System.Windows.Forms.TabPage();
@@ -76,6 +77,8 @@
             this.customerName = new System.Windows.Forms.TextBox();
             this.customerNameLabel = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.reportItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.projectPanel.SuspendLayout();
@@ -87,7 +90,9 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addItem});
+            this.addItem,
+            this.allPrice,
+            this.reportItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1170, 24);
@@ -100,6 +105,13 @@
             this.addItem.Size = new System.Drawing.Size(71, 20);
             this.addItem.Text = "Добавить";
             this.addItem.Click += new System.EventHandler(this.addItem_Click);
+            // 
+            // allPrice
+            // 
+            this.allPrice.Name = "allPrice";
+            this.allPrice.Size = new System.Drawing.Size(54, 20);
+            this.allPrice.Text = "Прайс";
+            this.allPrice.Click += new System.EventHandler(this.allPrice_Click);
             // 
             // tabControl
             // 
@@ -532,6 +544,13 @@
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
+            // reportItem
+            // 
+            this.reportItem.Name = "reportItem";
+            this.reportItem.Size = new System.Drawing.Size(102, 20);
+            this.reportItem.Text = "Отчёт за месяц";
+            this.reportItem.Click += new System.EventHandler(this.reportItem_Click);
+            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -612,6 +631,9 @@
         private System.Windows.Forms.TextBox employeeAcceptDate;
         private System.Windows.Forms.TextBox employeeBirthDate;
         private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.ToolStripMenuItem allPrice;
+        private System.Windows.Forms.ToolStripMenuItem reportItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 
