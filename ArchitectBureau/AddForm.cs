@@ -141,95 +141,105 @@ namespace ArchitectBureau
         {
             using (MySqlApplicationContext db = new MySqlApplicationContext())
             {
-                switch (createTypeComboBox.SelectedIndex)
+                try
                 {
-                    case 0:
-                        Project project = new Project()
-                        {
-                            TeamId = _teams[projectTeamComboBox.SelectedIndex].Id,
-                            OrderDate = projectOrderDatePicker.Value,
-                            FinishDate =
-                                projectOrderDatePicker.Value.AddMonths(
-                                    _projectTypes[projectTypeComboBox.SelectedIndex].Term),
-                            ProjectStatusId = _projectStatuses[projectStatusComboBox.SelectedIndex].Id,
-                            ProjectTypeId = _projectTypes[projectTypeComboBox.SelectedIndex].Id,
-                            CustomerId = _customers[projectCustomerComboBox.SelectedIndex].Id,
-                        };
-                        db.Projects.Add(project);
-                        db.SaveChanges();
-                        project = db.Projects
-                            .Include(item => item.Team)
+                    switch (createTypeComboBox.SelectedIndex)
+                    {
+                        case 0:
+
+                            Project project = new Project()
+                            {
+                                TeamId = _teams[projectTeamComboBox.SelectedIndex].Id,
+                                OrderDate = projectOrderDatePicker.Value,
+                                FinishDate =
+                                    projectOrderDatePicker.Value.AddMonths(
+                                        _projectTypes[projectTypeComboBox.SelectedIndex].Term),
+                                ProjectStatusId = _projectStatuses[projectStatusComboBox.SelectedIndex].Id,
+                                ProjectTypeId = _projectTypes[projectTypeComboBox.SelectedIndex].Id,
+                                CustomerId = _customers[projectCustomerComboBox.SelectedIndex].Id,
+                            };
+                            db.Projects.Add(project);
+                            db.SaveChanges();
+                            project = db.Projects
+                                .Include(item => item.Team)
                                 .ThenInclude(item => item.Employees)
-                            .Include(item => item.ProjectStatus)
-                            .Include(item => item.ProjectType)
-                            .Include(item => item.Customer)
+                                .Include(item => item.ProjectStatus)
+                                .Include(item => item.ProjectType)
+                                .Include(item => item.Customer)
                                 .ThenInclude(item => item.Projects)
-                            .First(item => item.Id == project.Id);
-                        ReturnValues = new object[]
-                        {
-                            project.Id,
-                            project.Team.Name,
-                            project.OrderDate.ToString("dd.MM.yyyy"),
-                            project.FinishDate.ToString("dd.MM.yyyy"),
-                            project.ProjectStatus.Name,
-                            project.ProjectType.Name,
-                            project.Customer.FirstName + " " + project.Customer.LastName,
-                            project.Team.Employees.Count + project.Customer.Projects.Count + project.ProjectType.Price
-                        };
-                        break;
-                    case 1:
-                        Employee employee = new Employee()
-                        {
-                            TeamId = _teams[employeeTeamComboBox.SelectedIndex].Id,
-                            PositionId = _positions[employeePositionComboBox.SelectedIndex].Id,
-                            FirstName = employeeFirstNameTextBox.Text,
-                            LastName = employeeLastNameTextBox.Text,
-                            BirthDate = employeeBirthDatePicker.Value,
-                            HomeAddress = employeeHomeAddressTextBox.Text,
-                            Phone = employeePhoneTextBox.Text,
-                            ApplyDate = employeeApplyDatePicker.Value
-                        };
-                        db.Employees.Add(employee);
-                        db.SaveChanges();
-                        employee = db.Employees
-                            .Include(item => item.Team)
-                            .Include(item => item.Position)
-                            .First(item => item.Id == employee.Id);
-                        ReturnValues = new object[]
-                        {
-                            employee.Id,
-                            employee.Team.Name,
-                            employee.Position.Name,
-                            employee.FirstName + " " + employee.LastName,
-                            employee.BirthDate.ToString("dd.MM.yyyy"),
-                            employee.HomeAddress,
-                            employee.Phone,
-                            employee.ApplyDate.ToString("dd.MM.yyyy"),
-                            (DateTime.Today - employee.ApplyDate).Days
-                        };
-                        break;
-                    case 2:
-                        Customer customer = new Customer()
-                        {
-                            FirstName = customerFirstNameTextBox.Text,
-                            LastName = customerLastNameTextBox.Text,
-                            Email = customerEmailTextBox.Text,
-                            Phone = customerPhoneTextBox.Text
-                        };
-                        db.Customers.Add(customer);
-                        db.SaveChanges();
-                        customer = db.Customers
-                            .Include(item => item.Projects)
-                            .First(item => item.Id == customer.Id);
-                        ReturnValues = new object[]
-                        {
-                            customer.Id,
-                            customer.FirstName + " " + customer.LastName,
-                            customer.Email,
-                            customer.Phone,
-                            customer.Projects.Count
-                        };
-                        break;
+                                .First(item => item.Id == project.Id);
+                            ReturnValues = new object[]
+                            {
+                                project.Id,
+                                project.Team.Name,
+                                project.OrderDate.ToString("dd.MM.yyyy"),
+                                project.FinishDate.ToString("dd.MM.yyyy"),
+                                project.ProjectStatus.Name,
+                                project.ProjectType.Name,
+                                project.Customer.FirstName + " " + project.Customer.LastName,
+                                project.Team.Employees.Count + project.Customer.Projects.Count +
+                                project.ProjectType.Price
+                            };
+                            break;
+                        case 1:
+                            Employee employee = new Employee()
+                            {
+                                TeamId = _teams[employeeTeamComboBox.SelectedIndex].Id,
+                                PositionId = _positions[employeePositionComboBox.SelectedIndex].Id,
+                                FirstName = employeeFirstNameTextBox.Text == "" ? null : employeeFirstNameTextBox.Text,
+                                LastName = employeeLastNameTextBox.Text == "" ? null : employeeLastNameTextBox.Text,
+                                BirthDate = employeeBirthDatePicker.Value,
+                                HomeAddress = employeeHomeAddressTextBox.Text == "" ? null : employeeHomeAddressTextBox.Text,
+                                Phone = employeePhoneTextBox.Text == "" ? null : employeePhoneTextBox.Text,
+                                ApplyDate = employeeApplyDatePicker.Value
+                            };
+                            db.Employees.Add(employee);
+                            db.SaveChanges();
+                            employee = db.Employees
+                                .Include(item => item.Team)
+                                .Include(item => item.Position)
+                                .First(item => item.Id == employee.Id);
+                            ReturnValues = new object[]
+                            {
+                                employee.Id,
+                                employee.Team.Name,
+                                employee.Position.Name,
+                                employee.FirstName + " " + employee.LastName,
+                                employee.BirthDate.ToString("dd.MM.yyyy"),
+                                employee.HomeAddress,
+                                employee.Phone,
+                                employee.ApplyDate.ToString("dd.MM.yyyy"),
+                                (DateTime.Today - employee.ApplyDate).Days
+                            };
+                            break;
+                        case 2:
+                            Customer customer = new Customer()
+                            {
+                                FirstName = customerFirstNameTextBox.Text == "" ? null : customerFirstNameTextBox.Text,
+                                LastName = customerLastNameTextBox.Text == "" ? null : customerLastNameTextBox.Text,
+                                Email = customerEmailTextBox.Text == "" ? null : customerEmailTextBox.Text,
+                                Phone = customerPhoneTextBox.Text == "" ? null : customerPhoneTextBox.Text
+                            };
+                            db.Customers.Add(customer);
+                            db.SaveChanges();
+                            customer = db.Customers
+                                .Include(item => item.Projects)
+                                .First(item => item.Id == customer.Id);
+                            ReturnValues = new object[]
+                            {
+                                customer.Id,
+                                customer.FirstName + " " + customer.LastName,
+                                customer.Email,
+                                customer.Phone,
+                                customer.Projects.Count
+                            };
+                            break;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show(@"Неправильно введены данные");
+                    return;
                 }
             }
 
@@ -240,83 +250,92 @@ namespace ArchitectBureau
         {
             using (MySqlApplicationContext db = new MySqlApplicationContext())
             {
-                switch (createTypeComboBox.SelectedIndex)
+                try
                 {
-                    case 0:
-                        Project project = db.Projects.First(item => item.Id == _id);
-                        project.Team = _teams[projectTeamComboBox.SelectedIndex];
-                        project.ProjectStatus = _projectStatuses[projectStatusComboBox.SelectedIndex];
-                        project.ProjectType = _projectTypes[projectTypeComboBox.SelectedIndex];
-                        project.Customer = _customers[projectCustomerComboBox.SelectedIndex];
-                        project.OrderDate = projectOrderDatePicker.Value;
-                        project.FinishDate =
-                            project.OrderDate.AddMonths(_projectTypes[projectTypeComboBox.SelectedIndex].Term);
-                        db.SaveChanges();
-                        project = db.Projects
-                            .Include(item => item.Team)
+                    switch (createTypeComboBox.SelectedIndex)
+                    {
+                        case 0:
+                            Project project = db.Projects.First(item => item.Id == _id);
+                            project.Team = _teams[projectTeamComboBox.SelectedIndex];
+                            project.ProjectStatus = _projectStatuses[projectStatusComboBox.SelectedIndex];
+                            project.ProjectType = _projectTypes[projectTypeComboBox.SelectedIndex];
+                            project.Customer = _customers[projectCustomerComboBox.SelectedIndex];
+                            project.OrderDate = projectOrderDatePicker.Value;
+                            project.FinishDate =
+                                project.OrderDate.AddMonths(_projectTypes[projectTypeComboBox.SelectedIndex].Term);
+                            db.SaveChanges();
+                            project = db.Projects
+                                .Include(item => item.Team)
                                 .ThenInclude(item => item.Employees)
-                            .Include(item => item.ProjectStatus)
-                            .Include(item => item.ProjectType)
-                            .Include(item => item.Customer)
+                                .Include(item => item.ProjectStatus)
+                                .Include(item => item.ProjectType)
+                                .Include(item => item.Customer)
                                 .ThenInclude(item => item.Projects)
-                            .First(item => item.Id == project.Id);
-                        ReturnValues = new object[]
-                        {
-                            project.Id,
-                            project.Team.Name,
-                            project.OrderDate.ToString("dd.MM.yyyy"),
-                            project.FinishDate.ToString("dd.MM.yyyy"),
-                            project.ProjectStatus.Name,
-                            project.ProjectType.Name,
-                            project.Customer.FirstName + " " + project.Customer.LastName,
-                            project.Team.Employees.Count + project.Customer.Projects.Count + project.ProjectType.Price
-                        };
-                        break;
-                    case 1:
-                        Employee employee = db.Employees.First(item => item.Id == _id);
-                        employee.Team = _teams[employeeTeamComboBox.SelectedIndex];
-                        employee.Position = _positions[employeePositionComboBox.SelectedIndex];
-                        employee.FirstName = employeeFirstNameTextBox.Text;
-                        employee.LastName = employeeLastNameTextBox.Text;
-                        employee.BirthDate = employeeBirthDatePicker.Value;
-                        employee.HomeAddress = employeeHomeAddressTextBox.Text;
-                        employee.Phone = employeePhoneTextBox.Text;
-                        employee.ApplyDate = employeeApplyDatePicker.Value;
-                        ReturnValues = new object[]
-                        {
-                            employee.Id,
-                            employee.Team.Name,
-                            employee.Position.Name,
-                            employee.FirstName + " " + employee.LastName,
-                            employee.BirthDate.ToString("dd.MM.yyyy"),
-                            employee.HomeAddress,
-                            employee.Phone,
-                            employee.ApplyDate.ToString("dd.MM.yyyy"),
-                            (DateTime.Today - employee.ApplyDate).Days
-                        };
-                        break;
-                    case 2:
-                        Customer customer = db.Customers.First(item => item.Id == _id);
-                        customer.FirstName = customerFirstNameTextBox.Text;
-                        customer.LastName = customerLastNameTextBox.Text;
-                        customer.Email = customerEmailTextBox.Text;
-                        customer.Phone = customerPhoneTextBox.Text;
-                        db.SaveChanges();
-                        customer = db.Customers
-                            .Include(item => item.Projects)
-                            .First(item => item.Id == customer.Id);
-                        ReturnValues = new object[]
-                        {
-                            customer.Id,
-                            customer.FirstName + " " + customer.LastName,
-                            customer.Email,
-                            customer.Phone,
-                            customer.Projects.Count
-                        };
-                        break;
-                }
+                                .First(item => item.Id == project.Id);
+                            ReturnValues = new object[]
+                            {
+                                project.Id,
+                                project.Team.Name,
+                                project.OrderDate.ToString("dd.MM.yyyy"),
+                                project.FinishDate.ToString("dd.MM.yyyy"),
+                                project.ProjectStatus.Name,
+                                project.ProjectType.Name,
+                                project.Customer.FirstName + " " + project.Customer.LastName,
+                                project.Team.Employees.Count + project.Customer.Projects.Count +
+                                project.ProjectType.Price
+                            };
+                            break;
+                        case 1:
+                            Employee employee = db.Employees.First(item => item.Id == _id);
+                            employee.Team = _teams[employeeTeamComboBox.SelectedIndex];
+                            employee.Position = _positions[employeePositionComboBox.SelectedIndex];
+                            employee.FirstName = employeeFirstNameTextBox.Text == "" ? null : employeeFirstNameTextBox.Text;
+                            employee.LastName = employeeLastNameTextBox.Text == "" ? null : employeeLastNameTextBox.Text;
+                            employee.BirthDate = employeeBirthDatePicker.Value;
+                            employee.HomeAddress = employeeHomeAddressTextBox.Text == "" ? null : employeeHomeAddressTextBox.Text;
+                            employee.Phone = employeePhoneTextBox.Text == "" ? null : employeePhoneTextBox.Text;
+                            employee.ApplyDate = employeeApplyDatePicker.Value;
+                            ReturnValues = new object[]
+                            {
+                                employee.Id,
+                                employee.Team.Name,
+                                employee.Position.Name,
+                                employee.FirstName + " " + employee.LastName,
+                                employee.BirthDate.ToString("dd.MM.yyyy"),
+                                employee.HomeAddress,
+                                employee.Phone,
+                                employee.ApplyDate.ToString("dd.MM.yyyy"),
+                                (DateTime.Today - employee.ApplyDate).Days
+                            };
+                            break;
+                        case 2:
+                            Customer customer = db.Customers.First(item => item.Id == _id);
+                            customer.FirstName = customerFirstNameTextBox.Text == "" ? null : customerFirstNameTextBox.Text;
+                            customer.LastName = customerLastNameTextBox.Text == "" ? null : customerLastNameTextBox.Text;
+                            customer.Email = customerEmailTextBox.Text == "" ? null : customerEmailTextBox.Text;
+                            customer.Phone = customerPhoneTextBox.Text == "" ? null : customerPhoneTextBox.Text;
+                            db.SaveChanges();
+                            customer = db.Customers
+                                .Include(item => item.Projects)
+                                .First(item => item.Id == customer.Id);
+                            ReturnValues = new object[]
+                            {
+                                customer.Id,
+                                customer.FirstName + " " + customer.LastName,
+                                customer.Email,
+                                customer.Phone,
+                                customer.Projects.Count
+                            };
+                            break;
+                    }
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    MessageBox.Show(@"Неправильно введены данные");
+                    return;
+                }
             }
 
             Close();
