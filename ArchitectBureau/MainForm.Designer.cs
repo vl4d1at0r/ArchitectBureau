@@ -31,6 +31,7 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.addItem = new System.Windows.Forms.ToolStripMenuItem();
             this.allPrice = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectPage = new System.Windows.Forms.TabPage();
             this.employeePage = new System.Windows.Forms.TabPage();
@@ -77,7 +78,6 @@
             this.customerName = new System.Windows.Forms.TextBox();
             this.customerNameLabel = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.reportItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -112,6 +112,13 @@
             this.allPrice.Size = new System.Drawing.Size(54, 20);
             this.allPrice.Text = "Прайс";
             this.allPrice.Click += new System.EventHandler(this.allPrice_Click);
+            // 
+            // reportItem
+            // 
+            this.reportItem.Name = "reportItem";
+            this.reportItem.Size = new System.Drawing.Size(102, 20);
+            this.reportItem.Text = "Отчёт за месяц";
+            this.reportItem.Click += new System.EventHandler(this.reportItem_Click);
             // 
             // tabControl
             // 
@@ -544,13 +551,6 @@
             this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
-            // reportItem
-            // 
-            this.reportItem.Name = "reportItem";
-            this.reportItem.Size = new System.Drawing.Size(102, 20);
-            this.reportItem.Text = "Отчёт за месяц";
-            this.reportItem.Click += new System.EventHandler(this.reportItem_Click);
-            // 
             // MainForm
             // 
             this.BackColor = System.Drawing.Color.White;
@@ -563,7 +563,9 @@
             this.Controls.Add(this.projectPanel);
             this.Controls.Add(this.customerPanel);
             this.Controls.Add(this.employeePanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MainMenuStrip = this.menuStrip;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Архитектурное бюро";
             this.Load += new System.EventHandler(this.MainForm_Load);

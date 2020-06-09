@@ -463,6 +463,8 @@
             this.Controls.Add(this.employeePanel);
             this.Controls.Add(this.projectPanel);
             this.Controls.Add(this.customerPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "AddForm";
             this.Load += new System.EventHandler(this.AddForm_Load);
             this.projectPanel.ResumeLayout(false);
