@@ -44,9 +44,7 @@
             this.createButton = new System.Windows.Forms.Button();
             this.employeePositionComboBox = new System.Windows.Forms.ComboBox();
             this.employeePanel = new System.Windows.Forms.Panel();
-            this.employeeApplyDatePicker = new System.Windows.Forms.DateTimePicker();
-            this.employeeApplyDateLabel = new System.Windows.Forms.Label();
-            this.employeePhoneTextBox = new System.Windows.Forms.TextBox();
+            this.employeePhoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.employeePhoneLabel = new System.Windows.Forms.Label();
             this.employeeHomeAddressTextBox = new System.Windows.Forms.TextBox();
             this.employeeHomeAddressLabel = new System.Windows.Forms.Label();
@@ -60,8 +58,8 @@
             this.employeeTeamComboBox = new System.Windows.Forms.ComboBox();
             this.employeeTeamLabel = new System.Windows.Forms.Label();
             this.customerPanel = new System.Windows.Forms.Panel();
+            this.customerPhoneTextBox = new System.Windows.Forms.MaskedTextBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.customerPhoneTextBox = new System.Windows.Forms.TextBox();
             this.customerPhoneLabel = new System.Windows.Forms.Label();
             this.customerEmailTextBox = new System.Windows.Forms.TextBox();
             this.customerEmailLabel = new System.Windows.Forms.Label();
@@ -218,8 +216,6 @@
             // employeePanel
             // 
             this.employeePanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.employeePanel.Controls.Add(this.employeeApplyDatePicker);
-            this.employeePanel.Controls.Add(this.employeeApplyDateLabel);
             this.employeePanel.Controls.Add(this.employeePhoneTextBox);
             this.employeePanel.Controls.Add(this.employeePhoneLabel);
             this.employeePanel.Controls.Add(this.employeeHomeAddressTextBox);
@@ -239,29 +235,13 @@
             this.employeePanel.Size = new System.Drawing.Size(337, 169);
             this.employeePanel.TabIndex = 4;
             // 
-            // employeeApplyDatePicker
-            // 
-            this.employeeApplyDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.employeeApplyDatePicker.Location = new System.Drawing.Point(177, 143);
-            this.employeeApplyDatePicker.Name = "employeeApplyDatePicker";
-            this.employeeApplyDatePicker.Size = new System.Drawing.Size(151, 20);
-            this.employeeApplyDatePicker.TabIndex = 23;
-            // 
-            // employeeApplyDateLabel
-            // 
-            this.employeeApplyDateLabel.AutoSize = true;
-            this.employeeApplyDateLabel.Location = new System.Drawing.Point(174, 126);
-            this.employeeApplyDateLabel.Name = "employeeApplyDateLabel";
-            this.employeeApplyDateLabel.Size = new System.Drawing.Size(77, 13);
-            this.employeeApplyDateLabel.TabIndex = 22;
-            this.employeeApplyDateLabel.Text = "Дата приёма:";
-            // 
             // employeePhoneTextBox
             // 
-            this.employeePhoneTextBox.Location = new System.Drawing.Point(177, 103);
+            this.employeePhoneTextBox.Location = new System.Drawing.Point(177, 101);
+            this.employeePhoneTextBox.Mask = "(000)000-00-00";
             this.employeePhoneTextBox.Name = "employeePhoneTextBox";
             this.employeePhoneTextBox.Size = new System.Drawing.Size(151, 20);
-            this.employeePhoneTextBox.TabIndex = 21;
+            this.employeePhoneTextBox.TabIndex = 24;
             // 
             // employeePhoneLabel
             // 
@@ -366,8 +346,8 @@
             // customerPanel
             // 
             this.customerPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.customerPanel.Controls.Add(this.splitter1);
             this.customerPanel.Controls.Add(this.customerPhoneTextBox);
+            this.customerPanel.Controls.Add(this.splitter1);
             this.customerPanel.Controls.Add(this.customerPhoneLabel);
             this.customerPanel.Controls.Add(this.customerEmailTextBox);
             this.customerPanel.Controls.Add(this.customerEmailLabel);
@@ -380,6 +360,14 @@
             this.customerPanel.Size = new System.Drawing.Size(336, 168);
             this.customerPanel.TabIndex = 5;
             // 
+            // customerPhoneTextBox
+            // 
+            this.customerPhoneTextBox.Location = new System.Drawing.Point(7, 137);
+            this.customerPhoneTextBox.Mask = "(000)000-00-00";
+            this.customerPhoneTextBox.Name = "customerPhoneTextBox";
+            this.customerPhoneTextBox.Size = new System.Drawing.Size(151, 20);
+            this.customerPhoneTextBox.TabIndex = 25;
+            // 
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
@@ -387,13 +375,6 @@
             this.splitter1.Size = new System.Drawing.Size(3, 164);
             this.splitter1.TabIndex = 24;
             this.splitter1.TabStop = false;
-            // 
-            // customerPhoneTextBox
-            // 
-            this.customerPhoneTextBox.Location = new System.Drawing.Point(7, 137);
-            this.customerPhoneTextBox.Name = "customerPhoneTextBox";
-            this.customerPhoneTextBox.Size = new System.Drawing.Size(151, 20);
-            this.customerPhoneTextBox.TabIndex = 23;
             // 
             // customerPhoneLabel
             // 
@@ -496,9 +477,6 @@
         private System.Windows.Forms.Label projectTeamLabel;
         private System.Windows.Forms.ComboBox employeePositionComboBox;
         private System.Windows.Forms.Panel employeePanel;
-        private System.Windows.Forms.DateTimePicker employeeApplyDatePicker;
-        private System.Windows.Forms.Label employeeApplyDateLabel;
-        private System.Windows.Forms.TextBox employeePhoneTextBox;
         private System.Windows.Forms.Label employeePhoneLabel;
         private System.Windows.Forms.TextBox employeeHomeAddressTextBox;
         private System.Windows.Forms.Label employeeHomeAddressLabel;
@@ -512,7 +490,6 @@
         private System.Windows.Forms.ComboBox employeeTeamComboBox;
         private System.Windows.Forms.Label employeeTeamLabel;
         private System.Windows.Forms.Panel customerPanel;
-        private System.Windows.Forms.TextBox customerPhoneTextBox;
         private System.Windows.Forms.Label customerPhoneLabel;
         private System.Windows.Forms.TextBox customerEmailTextBox;
         private System.Windows.Forms.Label customerEmailLabel;
@@ -521,5 +498,7 @@
         private System.Windows.Forms.TextBox customerFirstNameTextBox;
         private System.Windows.Forms.Label customerFirstNameLabel;
         private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.MaskedTextBox employeePhoneTextBox;
+        private System.Windows.Forms.MaskedTextBox customerPhoneTextBox;
     }
 }

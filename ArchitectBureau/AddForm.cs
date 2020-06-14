@@ -92,7 +92,6 @@ namespace ArchitectBureau
                             employeeBirthDatePicker.Value = employee.BirthDate;
                             employeeHomeAddressTextBox.Text = employee.HomeAddress;
                             employeePhoneTextBox.Text = employee.Phone;
-                            employeeApplyDatePicker.Value = employee.ApplyDate;
                         }
 
                         break;
@@ -144,6 +143,8 @@ namespace ArchitectBureau
                 switch (createTypeComboBox.SelectedIndex)
                 {
                     case 0:
+                        if (!Validate(0))
+                            return;
                         Project project = new Project()
                         {
                             TeamId = _teams[projectTeamComboBox.SelectedIndex].Id,
@@ -159,11 +160,11 @@ namespace ArchitectBureau
                         db.SaveChanges();
                         project = db.Projects
                             .Include(item => item.Team)
-                                .ThenInclude(item => item.Employees)
+                            .ThenInclude(item => item.Employees)
                             .Include(item => item.ProjectStatus)
                             .Include(item => item.ProjectType)
                             .Include(item => item.Customer)
-                                .ThenInclude(item => item.Projects)
+                            .ThenInclude(item => item.Projects)
                             .First(item => item.Id == project.Id);
                         ReturnValues = new object[]
                         {
@@ -178,6 +179,8 @@ namespace ArchitectBureau
                         };
                         break;
                     case 1:
+                        if (!Validate(1))
+                            return;
                         Employee employee = new Employee()
                         {
                             TeamId = _teams[employeeTeamComboBox.SelectedIndex].Id,
@@ -187,7 +190,7 @@ namespace ArchitectBureau
                             BirthDate = employeeBirthDatePicker.Value,
                             HomeAddress = employeeHomeAddressTextBox.Text,
                             Phone = employeePhoneTextBox.Text,
-                            ApplyDate = employeeApplyDatePicker.Value
+                            ApplyDate = DateTime.Today
                         };
                         db.Employees.Add(employee);
                         db.SaveChanges();
@@ -209,6 +212,8 @@ namespace ArchitectBureau
                         };
                         break;
                     case 2:
+                        if (!Validate(2))
+                            return;
                         Customer customer = new Customer()
                         {
                             FirstName = customerFirstNameTextBox.Text,
@@ -243,6 +248,8 @@ namespace ArchitectBureau
                 switch (createTypeComboBox.SelectedIndex)
                 {
                     case 0:
+                        if (!Validate(0))
+                            return;
                         Project project = db.Projects.First(item => item.Id == _id);
                         project.Team = _teams[projectTeamComboBox.SelectedIndex];
                         project.ProjectStatus = _projectStatuses[projectStatusComboBox.SelectedIndex];
@@ -254,11 +261,11 @@ namespace ArchitectBureau
                         db.SaveChanges();
                         project = db.Projects
                             .Include(item => item.Team)
-                                .ThenInclude(item => item.Employees)
+                            .ThenInclude(item => item.Employees)
                             .Include(item => item.ProjectStatus)
                             .Include(item => item.ProjectType)
                             .Include(item => item.Customer)
-                                .ThenInclude(item => item.Projects)
+                            .ThenInclude(item => item.Projects)
                             .First(item => item.Id == project.Id);
                         ReturnValues = new object[]
                         {
@@ -273,6 +280,8 @@ namespace ArchitectBureau
                         };
                         break;
                     case 1:
+                        if (!Validate(1))
+                            return;
                         Employee employee = db.Employees.First(item => item.Id == _id);
                         employee.Team = _teams[employeeTeamComboBox.SelectedIndex];
                         employee.Position = _positions[employeePositionComboBox.SelectedIndex];
@@ -281,7 +290,6 @@ namespace ArchitectBureau
                         employee.BirthDate = employeeBirthDatePicker.Value;
                         employee.HomeAddress = employeeHomeAddressTextBox.Text;
                         employee.Phone = employeePhoneTextBox.Text;
-                        employee.ApplyDate = employeeApplyDatePicker.Value;
                         ReturnValues = new object[]
                         {
                             employee.Id,
@@ -296,6 +304,8 @@ namespace ArchitectBureau
                         };
                         break;
                     case 2:
+                        if (!Validate(2))
+                            return;
                         Customer customer = db.Customers.First(item => item.Id == _id);
                         customer.FirstName = customerFirstNameTextBox.Text;
                         customer.LastName = customerLastNameTextBox.Text;
@@ -320,6 +330,135 @@ namespace ArchitectBureau
             }
 
             Close();
+        }
+
+        private bool Validate(int type)
+        {
+            switch (type)
+            {
+                case 0:
+                    if (projectTeamComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбрана команда выполняющая проект!");
+                        return false;
+                    }
+
+                    if (projectOrderDatePicker.Value < DateTime.Today)
+                    {
+                        MessageBox.Show(@"Проект не может быть добавлен на прошедшее время!");
+                        return false;
+                    }
+
+                    if (projectStatusComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбран статус проекта!");
+                        return false;
+                    }
+
+                    if (projectTypeComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбран тип проекта!");
+                        return false;
+                    }
+
+                    if (projectCustomerComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбран клиент!");
+                        return false;
+                    }
+
+                    break;
+                case 1:
+                    if (employeeTeamComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбрана команда сотрудника!");
+                        return false;
+                    }
+
+                    if (employeePositionComboBox.SelectedIndex == -1)
+                    {
+                        MessageBox.Show(@"Не выбрана должность сотрудника!");
+                        return false;
+                    }
+
+                    if (employeeFirstNameTextBox.Text.Length < 3)
+                    {
+                        MessageBox.Show(@"Слишком короткое имя!");
+                        return false;
+                    }
+
+                    if (employeeFirstNameTextBox.Text.Any(item => !char.IsLetter(item)))
+                    {
+                        MessageBox.Show(@"Имя содержит запрещенные символы!");
+                        return false;
+                    }
+
+                    if (employeeLastNameTextBox.Text.Length < 3)
+                    {
+                        MessageBox.Show(@"Слишком короткая фамилия!");
+                        return false;
+                    }
+
+                    if (employeeLastNameTextBox.Text.Any(item => !char.IsLetter(item)))
+                    {
+                        MessageBox.Show(@"Фамилия содержит запрещенные символы!");
+                        return false;
+                    }
+
+                    if (employeeHomeAddressTextBox.Text == "")
+                    {
+                        MessageBox.Show(@"Адрес не может быть пустым!");
+                        return false;
+                    }
+
+                    if (employeePhoneTextBox.Text.Contains(" "))
+                    {
+                        MessageBox.Show(@"Телефон не заполнен!");
+                        return false;
+                    }
+
+                    break;
+                case 2:
+                    if (customerFirstNameTextBox.Text.Length < 3)
+                    {
+                        MessageBox.Show(@"Слишком короткое имя!");
+                        return false;
+                    }
+
+                    if (customerFirstNameTextBox.Text.Any(item => !char.IsLetter(item)))
+                    {
+                        MessageBox.Show(@"Имя содержит запрещенные символы!");
+                        return false;
+                    }
+
+                    if (customerLastNameTextBox.Text.Length < 3)
+                    {
+                        MessageBox.Show(@"Слишком короткая фамилия!");
+                        return false;
+                    }
+
+                    if (customerLastNameTextBox.Text.Any(item => !char.IsLetter(item)))
+                    {
+                        MessageBox.Show(@"Фамилия содержит запрещенные символы!");
+                        return false;
+                    }
+
+                    if (!customerEmailTextBox.Text.Contains("@") && !customerEmailTextBox.Text.Contains("."))
+                    {
+                        MessageBox.Show(@"Введен некорректный адрес электронной почты!");
+                        return false;
+                    }
+
+                    if (customerPhoneTextBox.Text.Contains(" "))
+                    {
+                        MessageBox.Show(@"Телефон не заполнен!");
+                        return false;
+                    }
+
+                    break;
+            }
+
+            return true;
         }
 
         private void AddForm_Load(object sender, EventArgs e)
