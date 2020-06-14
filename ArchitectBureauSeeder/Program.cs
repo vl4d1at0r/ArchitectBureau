@@ -80,7 +80,7 @@ namespace ArchitectBureauSeeder
                 db.SaveChanges();
                 Console.Write("OK\nГенерация сотрудников... ");
 
-                for (int i = 0; i < 20; i++)
+                for (int i = 0; i < 50; i++)
                 {
                     Faker faker = new Faker("ru");
                     db.Employees.Add(new Employee()
@@ -99,7 +99,7 @@ namespace ArchitectBureauSeeder
                 db.SaveChanges();
                 Console.Write("OK\nГенерация клиентов... ");
 
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     Faker faker = new Faker("ru");
                     db.Customers.Add(new Customer()
