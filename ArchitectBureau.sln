@@ -1,13 +1,13 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchitectBureau", "ArchitectBureau\ArchitectBureau.csproj", "{3E6ED387-5EED-4F11-96EA-05B834A12EAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectBureau", "ArchitectBureau\ArchitectBureau.csproj", "{3E6ED387-5EED-4F11-96EA-05B834A12EAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectBureauDataAccess", "ArchitectBureauDataAccess\ArchitectBureauDataAccess.csproj", "{D16B3EEF-18EF-4DDA-BBE0-3E8A6817B2B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchitectBureauSeeder", "ArchitectBureauSeeder\ArchitectBureauSeeder.csproj", "{BF92A77D-8572-4B56-81E5-FCBA9D4BAFF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectBureauSeeder", "ArchitectBureauSeeder\ArchitectBureauSeeder.csproj", "{BF92A77D-8572-4B56-81E5-FCBA9D4BAFF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
